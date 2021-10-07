@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchLocations } from "../slices/locationsSlice";
 import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
+import { MapWrapper } from "../elements";
 
-// Staging branch confirmation
 // withGoogleMap takes a react component and returns one. We call these "Higher Order Components"
 const MyMap = withGoogleMap((props) => (
   <GoogleMap
@@ -13,11 +13,7 @@ const MyMap = withGoogleMap((props) => (
     onClick={props.onMapClick}
   >
     {props.markers.map((marker) => (
-      <Marker
-        key={marker.key}
-        {...marker}
-        onRightClick={() => props.onMarkerRightClick(marker)}
-      />
+      <Marker key={marker.key} {...marker} onRightClick={() => props.onMarkerRightClick(marker)} />
     ))}
   </GoogleMap>
 ));
@@ -35,14 +31,16 @@ export default function Map() {
   }, []);
 
   return (
-    <MyMap
-      className="test"
-      containerElement={<div style={{ height: `100%` }} />}
-      mapElement={<div style={{ height: `100%` }} />}
-      onMapLoad={() => {}}
-      onMapClick={() => {}}
-      markers={locations}
-      onMarkerRightClick={() => {}}
-    />
+    <MapWrapper>
+      <MyMap
+        className="test"
+        containerElement={<div style={{ height: `100%` }} />}
+        mapElement={<div style={{ height: `100%` }} />}
+        onMapLoad={() => {}}
+        onMapClick={() => {}}
+        markers={locations}
+        onMarkerRightClick={() => {}}
+      />
+    </MapWrapper>
   );
 }
