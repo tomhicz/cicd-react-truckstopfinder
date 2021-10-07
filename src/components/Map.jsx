@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchLocations } from "../slices/locationsSlice";
 import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 
+// Staging branch confirmation
 // withGoogleMap takes a react component and returns one. We call these "Higher Order Components"
 const MyMap = withGoogleMap((props) => (
   <GoogleMap
