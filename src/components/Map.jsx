@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchLocations } from "../slices/locationsSlice";
 import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
-import { MapWrapper } from "../elements";
 
 // withGoogleMap takes a react component and returns one. We call these "Higher Order Components"
 const MyMap = withGoogleMap((props) => (
@@ -31,16 +30,14 @@ export default function Map() {
   }, []);
 
   return (
-    <MapWrapper>
-      <MyMap
-        className="test"
-        containerElement={<div style={{ height: `100%` }} />}
-        mapElement={<div style={{ height: `100%` }} />}
-        onMapLoad={() => {}}
-        onMapClick={() => {}}
-        markers={locations}
-        onMarkerRightClick={() => {}}
-      />
-    </MapWrapper>
+    <MyMap
+      className="test"
+      containerElement={<div style={{ height: `100%` }} />}
+      mapElement={<div style={{ height: `100%` }} />}
+      onMapLoad={() => {}}
+      onMapClick={() => {}}
+      markers={locations}
+      onMarkerRightClick={() => {}}
+    />
   );
 }
