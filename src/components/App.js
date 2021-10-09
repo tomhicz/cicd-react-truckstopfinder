@@ -14,9 +14,10 @@ export default function App() {
 
   return (
     <div className="app">
-      <Map />
+      {/*<Map />*/}
       {currentView === "Search" ? <Search setCurrentView={setCurrentView} /> : null}
       {currentView === "Results" ? <Results setCurrentView={setCurrentView} /> : null}
+      <Results />
     </div>
   );
 }
