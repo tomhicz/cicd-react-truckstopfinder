@@ -4,13 +4,10 @@ import axios from "axios";
 // This is built using redux toolkit for state management.
 // Read the documentation to understand this file: https://redux-toolkit.js.org/
 
-export const fetchLocations = createAsyncThunk(
-  "locations/fetchLocations",
-  async () => {
-    const { data: response } = await axios.get("/api/locations");
-    return response;
-  }
-);
+export const fetchLocations = createAsyncThunk("locations/fetchLocations", async () => {
+  const { data: response } = await axios.get("/api/locations");
+  return response;
+});
 
 const initialState = [];
 
