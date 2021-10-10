@@ -1,4 +1,5 @@
 // Update with your config settings.
+const path = require("path");
 
 module.exports = {
   development: {
@@ -8,10 +9,10 @@ module.exports = {
     searchPath: "public",
 
     migrations: {
-      directory: "./migrations",
+      directory: path.resolve(__dirname, "./migrations"),
     },
     seeds: {
-      directory: "./data/import.js",
+      directory: path.resolve(__dirname, "./data"),
     },
   },
 
