@@ -1,32 +1,47 @@
 // Update with your config settings.
-const path = require("path");
+//const path = require("path");
 
 module.exports = {
   development: {
     client: "pg",
     connection: process.env.DATABASE_URL,
-
-    searchPath: "public",
-
     migrations: {
-      directory: path.resolve(__dirname, "./migrations"),
+      tableName: "knex_migrations",
     },
-    seeds: {
-      directory: path.resolve(__dirname, "./data"),
-    },
+    // seeds: {
+    //   directory: "./data",
+    // },
   },
 
   staging: {
-    client: "pg",
-    connection:
-      process.env.DATABASE_URL ||
-      `postgres://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_NAME}`,
-    searchPath: "public",
-    migrations: {
-      directory: "./migrations",
+    client: "postgresql",
+    connection: {
+      database: "my_db",
+      user: "username",
+      password: "password",
     },
-    seeds: {
-      directory: "./data/",
+    pool: {
+      min: 2,
+      max: 10,
+    },
+    migrations: {
+      tableName: "knex_migrations",
+    },
+  },
+
+  production: {
+    client: "postgresql",
+    connection: {
+      database: "my_db",
+      user: "username",
+      password: "password",
+    },
+    pool: {
+      min: 2,
+      max: 10,
+    },
+    migrations: {
+      tableName: "knex_migrations",
     },
   },
 };
