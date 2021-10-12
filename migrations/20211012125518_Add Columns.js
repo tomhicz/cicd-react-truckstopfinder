@@ -1,19 +1,15 @@
 exports.up = function (knex) {
   return knex.schema.table("locations", (table) => {
-    table.text("state");
+    table.jsonb("addresses");
 
-    table.text("city");
-
-    table.text("highway");
+    table.jsonb("highwayAndExit");
   });
 };
 
 exports.down = function (knex) {
   return knex.schema.table("locations", (table) => {
-    table.dropColumn("state");
+    table.dropColumn("addresses");
 
-    table.dropColumn("city");
-
-    table.dropColumn("highway");
+    table.dropColumn("highwayAndExit");
   });
 };
