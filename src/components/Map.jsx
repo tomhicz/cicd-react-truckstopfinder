@@ -3,6 +3,22 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchLocations } from "../slices/locationsSlice";
 import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 
+const countryStore = new window.google.maps.MarkerImage(
+  "https://freesvg.org/img/Wagonwheel2.png",
+  null /* size is determined at runtime */,
+  null /* origin is 0,0 */,
+  null /* anchor is bottom center of the scaled image */,
+  new window.google.maps.Size(32, 32)
+);
+
+// const travelStop = new window.google.maps.MarkerImage(
+//   "https://freesvg.org/img/Wagonwheel2.png",
+//   null /* size is determined at runtime */,
+//   null /* origin is 0,0 */,
+//   null /* anchor is bottom center of the scaled image */,
+//   new window.google.maps.Size(32, 32)
+// );
+
 // withGoogleMap takes a react component and returns one. We call these "Higher Order Components"
 const MyMap = withGoogleMap((props) => (
   <GoogleMap
@@ -14,6 +30,31 @@ const MyMap = withGoogleMap((props) => (
     {props.markers.map((marker) => (
       <Marker key={marker.key} {...marker} onRightClick={() => props.onMarkerRightClick(marker)} />
     ))}
+    <Marker
+      icon={countryStore}
+      key="marker_1"
+      position={{
+        lat: 47.444,
+
+        lng: -122.176,
+      }}
+    />
+
+    {/* <Marker
+      key="marker_1"
+      icon={{
+        url: "https://cdn.mindbowser.com/custom_marker_pin.svg",
+
+        anchor: new google.maps.Point(17, 46),
+
+        scaledSize: new google.maps.Size(37, 37),
+      }}
+      position={{
+        lat: 47.444,
+
+        lng: -122.176,
+      }}
+    /> */}
   </GoogleMap>
 ));
 
@@ -25,8 +66,9 @@ export default function Map() {
   useEffect(() => {
     if (locations.length === 0) {
       dispatch(fetchLocations);
+      console.log("locations", locations);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    console.log("Locations use effect");
   }, []);
 
   return (

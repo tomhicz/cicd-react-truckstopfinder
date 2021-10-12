@@ -4,6 +4,7 @@
   "private": true,
   "license": "UNLICENSED",
   "author": "Felix Kirmse for Code Chrysalis",
+  "proxy": "http://localhost:9000",
   "scripts": {
     "start": "node server",
     "dev": "nodemon server",
