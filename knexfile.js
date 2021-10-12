@@ -8,9 +8,9 @@ module.exports = {
     migrations: {
       tableName: "knex_migrations",
     },
-    // seeds: {
-    //   directory: "./data",
-    // },
+    seeds: {
+      directory: "./data/seed",
+    },
   },
 
   staging: {
