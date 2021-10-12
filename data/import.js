@@ -12,12 +12,20 @@ const path = require("path");
       const latitude = location.Site.Latitude;
       const longitude = location.Site.Longitude;
       const name = location.Site.SiteName;
+      const addresses = JSON.stringify(location.Addresses);
+
+      const highwayAndExit = JSON.stringify({
+        highway: location.Site.highway,
+        exit: location.Site.exitNumber,
+      });
 
       const result = await db("locations").insert({
         id,
         latitude,
         longitude,
         name,
+        addresses,
+        highwayAndExit,
       });
       console.log(result);
     }
