@@ -2,4 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import theme from "../themes/theme";
 
-export const ResultsWrapper = styled.section``;
+export const ResultWrapper = styled.section`
+  background-color: lightblue;
+`;
