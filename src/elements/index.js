@@ -1,3 +1,3 @@
 export * from "./MapElement";
-export * from "./ResultsElement";
+export * from "./ResultsWrapper";
 export * from "./SearchElement";
