@@ -25,9 +25,6 @@ export default function App() {
         {/* <img src={logo} className="App-logo" alt="logo" /> */}
         <h2>Welcome to React!!!</h2>
       </div>
-      <p className="App-intro">
-        To get started, edit <code>src/App.jsx</code> and save to reload.
-      </p>
       <Map id="map" />
       {currentView === "Search" ? <Search setCurrentView={setCurrentView} /> : null}
       {currentView === "Results" ? <Results setCurrentView={setCurrentView} /> : null}
