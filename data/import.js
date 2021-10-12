@@ -12,12 +12,22 @@ const path = require("path");
       const latitude = location.Site.Latitude;
       const longitude = location.Site.Longitude;
       const name = location.Site.SiteName;
-      const addresses = JSON.stringify(location.Addresses);
 
+      const addresses = JSON.stringify(location.Addresses);
       const highwayAndExit = JSON.stringify({
-        highway: location.Site.highway,
-        exit: location.Site.exitNumber,
+        highway: location.Site.Highway,
+        exit: location.Site.ExitNumber,
       });
+
+      const concepts = JSON.stringify(location.Site.Concepts);
+
+      let type;
+
+      if (location.FacilitySubTypeId === 3) {
+        type = "Travel Stop";
+      } else if (location.FacilitySubTypeId === 4) {
+        type = "Country Store";
+      }
 
       const result = await db("locations").insert({
         id,
@@ -26,6 +36,8 @@ const path = require("path");
         name,
         addresses,
         highwayAndExit,
+        concepts,
+        type,
       });
       console.log(result);
     }
