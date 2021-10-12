@@ -3,10 +3,13 @@ const db = require("../server/knex.js");
 const path = require("path");
 
 (async () => {
+  console.log("Running seeding...");
   try {
     const locations = JSON.parse(
       fs.readFileSync(path.resolve(__dirname, "..", "data", "locations.json"))
     );
+
+    await db("locations").del();
     for (const location of locations) {
       const id = location.Site.SiteId;
       const latitude = location.Site.Latitude;
