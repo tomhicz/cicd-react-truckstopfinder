@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchLocations } from "../slices/locationsSlice";
 import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
+import axios from "axios";
 
 const countryStore = new window.google.maps.MarkerImage(
   "https://freesvg.org/img/Wagonwheel2.png",
@@ -63,10 +64,10 @@ export default function Map() {
   const dispatch = useDispatch();
   const locations = useSelector((state) => state.locations);
 
-  useEffect(() => {
+  useEffect(async () => {
     if (locations.length === 0) {
-      dispatch(fetchLocations);
-      console.log("locations", locations);
+      const { data: response } = await axios.get("/api/locations");
+      console.log("locations", response);
     }
     console.log("Locations use effect");
   }, []);

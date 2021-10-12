@@ -8,6 +8,7 @@
   "scripts": {
     "start": "node server",
     "dev": "nodemon server",
+    "migrate": "knex migrate:make",
     "hack": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

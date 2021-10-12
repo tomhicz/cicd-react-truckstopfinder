@@ -6,7 +6,6 @@ import axios from "axios";
 
 export const fetchLocations = createAsyncThunk("locations/fetchLocations", async () => {
   const { data: response } = await axios.get("/api/locations");
-  console.log("Fetchlocations is working");
   return response;
 });
 

@@ -31,6 +31,7 @@ export default function App() {
       <Map id="map" />
       {currentView === "Search" ? <Search setCurrentView={setCurrentView} /> : null}
       {currentView === "Results" ? <Results setCurrentView={setCurrentView} /> : null}
+      <Results />
     </div>
   );
 }
