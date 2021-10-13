@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 //import { ResultWrapper } from "../elements/ResultWrapper";
 
-export default function FuelPrices(props) {
+export default function FuelPrices({ fuel }) {
   //state
-
+  //console.log(fuel);
   //hooks
 
   //handlers
