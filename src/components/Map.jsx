@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchLocations } from "../slices/locationsSlice";
-import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
+import { google, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 import axios from "axios";
 
 const countryStore = new window.google.maps.MarkerImage(
@@ -61,7 +61,21 @@ const MyMap = withGoogleMap((props) => (
 
 // We use object destructuring here to shorten our code
 export default function Map(props) {
-  console.log(props.locations);
+  console.log("locations", props.locations);
+  const markers = [];
+  for (const location of props.locations) {
+    const marker = new google.maps.Marker({
+      key: location.id,
+      position: {
+        lat: location.latitude,
+
+        lng: location.longitude,
+      },
+      title: location.name,
+      icon: countryStore,
+    });
+    markers.push(marker);
+  }
 
   return (
     <MyMap

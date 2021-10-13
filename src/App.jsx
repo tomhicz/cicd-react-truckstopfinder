@@ -18,19 +18,18 @@ export default function App() {
 
   useEffect(() => {
     const controller = new AbortController();
-    if (locations.length === 0) {
-      (async () => {
-        try {
-          const { data: response } = await axios.get("/api/locations", {
-            signal: controller.signal,
-          });
-          setLocations(response);
-        } catch (e) {
-          // handle fetch error
-        }
-      })();
-      return () => controller?.abort();
-    }
+    (async () => {
+      try {
+        const { data: response } = await axios.get("/api/locations", {
+          signal: controller.signal,
+        });
+        setLocations(response);
+        console.log("response", response);
+      } catch (e) {
+        // handle fetch error
+      }
+    })();
+    return () => controller?.abort();
   }, []);
 
   //handlers
