@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Checkbox } from "../components/Checkbox";
 import { SearchWrapper } from "../elements";
 
 export default function Search() {
   //state
-  const [checkedOne, setCheckedOne] = React.useState(false);
+  const [checkedOne, setCheckedOne] = useState(false);
 
   //hooks
 
