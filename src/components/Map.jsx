@@ -60,17 +60,8 @@ const MyMap = withGoogleMap((props) => (
 ));
 
 // We use object destructuring here to shorten our code
-export default function Map() {
-  const dispatch = useDispatch();
-  const locations = useSelector((state) => state.locations);
-
-  useEffect(async () => {
-    if (locations.length === 0) {
-      const { data: response } = await axios.get("/api/locations");
-      console.log("locations", response);
-    }
-    console.log("Locations use effect");
-  }, []);
+export default function Map(props) {
+  console.log(props.locations);
 
   return (
     <MyMap
@@ -79,7 +70,7 @@ export default function Map() {
       mapElement={<div style={{ height: `100%` }} />}
       onMapLoad={() => {}}
       onMapClick={() => {}}
-      markers={locations}
+      markers={props.locations}
       onMarkerRightClick={() => {}}
     />
   );
