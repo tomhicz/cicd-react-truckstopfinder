@@ -10,7 +10,7 @@ export default function App() {
   //state
   const [currentView, setCurrentView] = useState();
   const [locations, setLocations] = useState([]);
-  const [markers, setMarkers] = useState([]);
+  // const [markers, setMarkers] = useState([]);
 
   //hooks
   useEffect(() => {
@@ -32,33 +32,41 @@ export default function App() {
     return () => controller?.abort();
   }, []);
 
-  useEffect(() => {
-    const countryStore = new window.google.maps.MarkerImage(
-      "https://freesvg.org/img/Wagonwheel2.png",
-      null /* size is determined at runtime */,
-      null /* origin is 0,0 */,
-      null /* anchor is bottom center of the scaled image */,
-      new window.google.maps.Size(32, 32)
-    );
+  // useEffect(() => {
+  //   const countryStore = new window.google.maps.MarkerImage(
+  //     "https://freesvg.org/img/Wagonwheel2.png",
+  //     null /* size is determined at runtime */,
+  //     null /* origin is 0,0 */,
+  //     null /* anchor is bottom center of the scaled image */,
+  //     new window.google.maps.Size(32, 32)
+  //   );
 
-    if (locations.length !== 0) {
-      const markersArray = [];
-      for (const location of locations) {
-        const marker = {
-          key: location.id,
-          position: {
-            lat: location.latitude,
+  //   const travelStop = new window.google.maps.MarkerImage(
+  //     "https://freesvg.org/img/squat-marker-green.png",
+  //     null /* size is determined at runtime */,
+  //     null /* origin is 0,0 */,
+  //     null /* anchor is bottom center of the scaled image */,
+  //     new window.google.maps.Size(32, 32)
+  //   );
 
-            lng: location.longitude,
-          },
-          title: location.name,
-          icon: countryStore,
-        };
-        markersArray.push(marker);
-      }
-      setMarkers(markersArray);
-    }
-  }, []);
+  //   if (locations.length !== 0) {
+  //     const markersArray = [];
+  //     for (const location of locations) {
+  //       const marker = {
+  //         key: location.id,
+  //         position: {
+  //           lat: location.latitude,
+
+  //           lng: location.longitude,
+  //         },
+  //         title: location.name,
+  //         icon: countryStore,
+  //       };
+  //       markersArray.push(marker);
+  //     }
+  //     setMarkers(markersArray);
+  //   }
+  // }, []);
 
   //handlers
   function getSearch() {
@@ -74,7 +82,7 @@ export default function App() {
       <p className="App-intro">
         To get started, edit <code>src/App.jsx</code> and save to reload.
       </p>
-      <Map id="map" locations={locations} markers={markers} />
+      <Map id="map" locations={locations} />
       {currentView === "Search" ? <Search setCurrentView={setCurrentView} /> : null}
       {currentView === "Results" ? <Results setCurrentView={setCurrentView} /> : null}
       <Results />

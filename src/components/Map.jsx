@@ -4,21 +4,22 @@ import { fetchLocations } from "../slices/locationsSlice";
 import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 import axios from "axios";
 
+// icon images from freesvg.org
 const countryStore = new window.google.maps.MarkerImage(
-  "https://freesvg.org/img/Wagonwheel2.png",
+  "https://freesvg.org/img/squat-marker-red.png",
   null /* size is determined at runtime */,
   null /* origin is 0,0 */,
   null /* anchor is bottom center of the scaled image */,
   new window.google.maps.Size(32, 32)
 );
 
-// const travelStop = new window.google.maps.MarkerImage(
-//   "https://freesvg.org/img/Wagonwheel2.png",
-//   null /* size is determined at runtime */,
-//   null /* origin is 0,0 */,
-//   null /* anchor is bottom center of the scaled image */,
-//   new window.google.maps.Size(32, 32)
-// );
+const travelStop = new window.google.maps.MarkerImage(
+  "https://freesvg.org/img/squat-marker-green.png",
+  null /* size is determined at runtime */,
+  null /* origin is 0,0 */,
+  null /* anchor is bottom center of the scaled image */,
+  new window.google.maps.Size(32, 32)
+);
 
 // withGoogleMap takes a react component and returns one. We call these "Higher Order Components"
 const MyMap = withGoogleMap((props) => (
@@ -31,43 +32,18 @@ const MyMap = withGoogleMap((props) => (
     {props.markers.map((marker) => (
       <Marker key={marker.key} {...marker} onRightClick={() => props.onMarkerRightClick(marker)} />
     ))}
-
-    {/* {console.log("locations", props.locations)} */}
-    {/* {props.locations.map((marker) => (
-      <Marker key={marker.key} {...marker} onRightClick={() => props.onMarkerRightClick(marker)} />
-    ))} */}
-    <Marker
-      icon={countryStore}
-      key="marker_1"
-      position={{
-        lat: 47.444,
-
-        lng: -122.176,
-      }}
-    />
-
-    {/* <Marker
-      key="marker_1"
-      icon={{
-        url: "https://cdn.mindbowser.com/custom_marker_pin.svg",
-
-        anchor: new google.maps.Point(17, 46),
-
-        scaledSize: new google.maps.Size(37, 37),
-      }}
-      position={{
-        lat: 47.444,
-
-        lng: -122.176,
-      }}
-    /> */}
   </GoogleMap>
 ));
 
 // We use object destructuring here to shorten our code
 export default function Map(props) {
+  console.log(props.locations);
   const markers = [];
+  let iconImage;
   for (const location of props.locations) {
+    if (location.type === "Travel Stop") {
+      iconImage = countryStore;
+    } else iconImage = travelStop;
     const marker = {
       key: location.id,
       position: {
@@ -76,7 +52,7 @@ export default function Map(props) {
         lng: location.longitude,
       },
       title: location.name,
-      icon: countryStore,
+      icon: iconImage,
     };
     markers.push(marker);
   }
