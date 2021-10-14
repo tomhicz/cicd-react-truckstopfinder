@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Checkbox } from "./Checkbox";
 import { SearchWrapper } from "../elements";
 
-<Options>
-  {props.options.map((option) => (
-    <Checkbox label={option} {...option} onRightClick={() => props.onMarkerRightClick(marker)} />
-  ))}
-</Options>;
+const Search = (props) => (
+  <Options>
+    {props.options.map((option) => (
+      <Checkbox label={option} {...option} onRightClick={() => props.onMarkerRightClick(marker)} />
+    ))}
+  </Options>
+);
 
 export default function Search() {
   //state
@@ -64,7 +66,7 @@ export default function Search() {
 
   return (
     <SearchWrapper>
-      <Options options={options}></Options>
+      <Search options={options}></Search>
       <Checkbox label="Travel Stop" value={travelStop} onChange={handleTravelStop} />
       <Checkbox label="Country Store" value={countryStore} onChange={handleCountryStore} />
       <p>Is &quot;My Value&quot; checked? {checkedOne.toString()}</p>
