@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ResultsWrapper } from "../elements/ResultsWrapper";
-import Result from "./Result";
+import Result from "./results/Result";
 import { query } from "./network";
 
 export default function Results(props) {

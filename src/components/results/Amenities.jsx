@@ -8,10 +8,16 @@ export default function Amenities({ amenities }) {
 
   //handlers
 
+  const amenArr = [];
+
+  for (const [key, value] of Object.entries(amenities)) {
+    amenArr.push(value);
+  }
+
   return (
     <div>
       Amenities:
-      {amenities.map((name, id) => {
+      {amenArr.map((name, id) => {
         return <div key={id}>{name}</div>;
       })}
     </div>
