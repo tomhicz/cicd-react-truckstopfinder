@@ -85,7 +85,7 @@ export default function App() {
       <Map id="map" locations={locations} />
       {currentView === "Search" ? <Search setCurrentView={setCurrentView} /> : null}
       {currentView === "Results" ? <Results setCurrentView={setCurrentView} /> : null}
-      <Results />
+      <Results locations={locations} />
     </div>
   );
 }

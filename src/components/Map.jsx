@@ -42,8 +42,8 @@ export default function Map(props) {
   let iconImage;
   for (const location of props.locations) {
     if (location.type === "Travel Stop") {
-      iconImage = countryStore;
-    } else iconImage = travelStop;
+      iconImage = travelStop;
+    } else iconImage = countryStore;
     const marker = {
       key: location.id,
       position: {
