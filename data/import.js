@@ -16,15 +16,18 @@ const path = require("path");
       const longitude = location.Site.Longitude;
       const name = location.Site.SiteName;
 
-      const addresses = JSON.stringify(location.Addresses);
+      const addresses = JSON.stringify(location.Addresses[0]);
       const highwayAndExit = JSON.stringify({
         highway: location.Site.Highway,
         exit: location.Site.ExitNumber,
       });
 
       //Filters out the name of the restaurants
-      const conceptsMap = location.Site.Concepts.map((concept) => concept.Concept.Name);
-      const restaurants = JSON.stringify(conceptsMap);
+      const conceptsMap = location.Site.Concepts.map((concept) => [
+        concept.Concept.Id,
+        concept.Concept.Name,
+      ]);
+      const restaurants = JSON.stringify(Object.fromEntries(conceptsMap));
 
       //gets the location type
       let type;
@@ -48,18 +51,22 @@ const path = require("path");
       // gets the location Truck Services
       const truckServiceMap = location.CustomFields.map((service) => {
         if (service.CustomField.Section === "Select Truck Services") {
-          return service.CustomField.DisplayName;
+          return [service.CustomField.Id, service.CustomField.DisplayName];
         }
       });
-      const truck_services = JSON.stringify(truckServiceMap.filter((entry) => entry !== undefined));
+      const truck_services = JSON.stringify(
+        Object.fromEntries(truckServiceMap.filter((entry) => entry !== undefined))
+      );
 
       // gets the location's Amenities
       const amenityMap = location.CustomFields.map((service) => {
         if (service.CustomField.Section === "Select Amenities") {
-          return service.CustomField.DisplayName;
+          return [service.CustomField.Id, service.CustomField.DisplayName];
         }
       });
-      const amenities = JSON.stringify(amenityMap.filter((entry) => entry !== undefined));
+      const amenities = JSON.stringify(
+        Object.fromEntries(amenityMap.filter((entry) => entry !== undefined))
+      );
 
       //Performs insertions
       const result = await db("locations").insert({
