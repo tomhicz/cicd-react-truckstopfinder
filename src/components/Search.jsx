@@ -11,7 +11,7 @@ export default function Search({
   locationState,
   setLocationState,
 }) {
-  //state
+  const [isLoading, setLoading] = useState(true);
   const [amenities, setAmenities] = useState();
 
   //fetch amenities
@@ -19,10 +19,13 @@ export default function Search({
     const controller = new AbortController();
     (async () => {
       try {
-        const { data: response } = await axios.get("/api/locations", {
+        const { data: response } = await axios.get("/api/amenities", {
           signal: controller.signal,
         });
-        setAmenities(Object.values(response));
+        const responseValues = Object.values(response);
+        setAmenities(responseValues);
+        setLoading(false);
+        console.log("----------AMENITIES FETCH---------");
       } catch (e) {
         // handle fetch error
       }
@@ -36,10 +39,13 @@ export default function Search({
   }, [searchState]);
 
   //handlers
-  const handleChange = (e, label, type) => {
-    const stateCopy = { ...searchState };
-    stateCopy[type][label] = !stateCopy[type][label];
-    setSearchState(stateCopy);
+  const handleChange = (e, label, type, isLoading = false) => {
+    if (!isLoading) {
+      const stateCopy = { ...searchState };
+      stateCopy[type][label] = !stateCopy[type][label];
+      setSearchState(stateCopy);
+      console.log("HANDLECHANGE");
+    }
   };
 
   const handleDropdown = (e, key, value) => {
@@ -75,6 +81,7 @@ export default function Search({
         searchState={searchState}
         setSearchState={setSearchState}
         handleChange={handleChange}
+        isLoading={isLoading}
         amenities={amenities}
       />
       <Restaurants
