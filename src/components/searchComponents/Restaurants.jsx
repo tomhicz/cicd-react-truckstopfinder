@@ -8,7 +8,7 @@ const Search = (props) => (
       <Checkbox
         key={props.options.indexOf(option)}
         label={option}
-        onChange={(e) => props.handleChange(e, option, "truck_services", props.isLoading)}
+        onChange={(e) => props.handleChange(e, option, "restaurants", props.isLoading)}
         {...option}
       />
     ))}
