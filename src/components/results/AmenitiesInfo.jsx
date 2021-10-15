@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-//import { ResultWrapper } from "../elements/ResultWrapper";
+import React from "react";
 
-export default function Amenities({ amenities }) {
+export default function AmenitiesInfo({ amenities }) {
   //state
 
   //hooks
