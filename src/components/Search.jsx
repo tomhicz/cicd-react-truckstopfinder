@@ -11,9 +11,9 @@ export default function Search() {
     type: {},
   });
   const [locationState, setLocationState] = useState({
-    state: undefined,
-    city: undefined,
-    highway: undefined,
+    state: null,
+    city: null,
+    highway: null,
   });
 
   //hooks

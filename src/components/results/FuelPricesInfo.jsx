@@ -1,7 +1,9 @@
-import React, { useState } from "react";
-//import { ResultWrapper } from "../elements/ResultWrapper";
+import React from "react";
+import styled from "styled-components";
 
-export default function FuelPrices({ fuel }) {
+const StyledFuel = styled.div``;
+
+export default function FuelPricesInfo({ fuel }) {
   //state
 
   //hooks
@@ -15,11 +17,11 @@ export default function FuelPrices({ fuel }) {
   }
 
   return (
-    <div>
+    <StyledFuel>
       <div>Fuel Prices:</div>
       {fuelArr.map((val, id) => {
         return <div key={id}>{val}</div>;
       })}
-    </div>
+    </StyledFuel>
   );
 }
