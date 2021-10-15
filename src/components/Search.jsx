@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Types, Amenities, Restaurants, Dropdown, Button } from "./searchComponents";
+import { Types, Amenities, Restaurants, Dropdown, Button, TruckServices } from "./searchComponents";
 import { SearchWrapper } from "../elements";
 
 export default function Search({
@@ -47,6 +47,11 @@ export default function Search({
         locationState={locationState}
         setLocationState={setLocationState}
         handleChange={handleDropdown}
+      />
+      <TruckServices
+        searchState={searchState}
+        setSearchState={setSearchState}
+        handleChange={handleChange}
       />
       <Types
         searchState={searchState}
