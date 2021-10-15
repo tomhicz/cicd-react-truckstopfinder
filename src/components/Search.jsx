@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { TruckServices, Types, Amenities, Restaurants, Dropdown, Button } from "./searchComponents";
 import { SearchWrapper } from "../elements";
+import axios from "axios";
 
 export default function Search({
   currentView,
@@ -10,6 +11,25 @@ export default function Search({
   locationState,
   setLocationState,
 }) {
+  //state
+  const [amenities, setAmenities] = useState();
+
+  //fetch amenities
+  useEffect(() => {
+    const controller = new AbortController();
+    (async () => {
+      try {
+        const { data: response } = await axios.get("/api/locations", {
+          signal: controller.signal,
+        });
+        setAmenities(Object.values(response));
+      } catch (e) {
+        // handle fetch error
+      }
+    })();
+    return () => controller?.abort();
+  }, []);
+
   //hooks
   useEffect(() => {
     console.log("real state", searchState);
@@ -22,21 +42,25 @@ export default function Search({
     setSearchState(stateCopy);
   };
 
-  //handlers
+  const handleDropdown = (e, key, value) => {
+    const stateCopy = { ...locationState };
+    stateCopy[key] = value;
+    setLocationState(stateCopy);
+  };
+
   const handleClick = (e, view) => {
     const stateCopy = { ...currentView };
     stateCopy[view] = "Results";
     setCurrentView(stateCopy);
-    console.log("curView from Search", currentView);
   };
 
   return (
     <SearchWrapper>
-      <Dropdown
+      {/* <Dropdown
         locationState={locationState}
         setLocationState={setLocationState}
-        handleChange={handleChange}
-      />
+        handleChange={handleDropdown}
+      /> */}
       <TruckServices
         searchState={searchState}
         setSearchState={setSearchState}
@@ -51,6 +75,7 @@ export default function Search({
         searchState={searchState}
         setSearchState={setSearchState}
         handleChange={handleChange}
+        amenities={amenities}
       />
       <Restaurants
         searchState={searchState}
