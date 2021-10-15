@@ -7,7 +7,7 @@ const Search = (props) => (
       <Checkbox
         key={type.key}
         label={type}
-        onChange={(e) => props.handleChange(e, type.label)}
+        onChange={(e) => props.handleChange(e, type.label, "type")}
         {...type}
       />
     ))}
@@ -19,7 +19,7 @@ export function Types({ searchState, setSearchState, handleChange }) {
   useEffect(() => {
     const stateCopy = { ...searchState };
     for (const type of types) {
-      stateCopy[type.label] = false;
+      stateCopy.type[type.label] = false;
     }
     setSearchState(stateCopy);
   }, []);

@@ -7,7 +7,7 @@ const Search = (props) => (
       <Checkbox
         key={option.key}
         label={option}
-        onChange={(e) => props.handleChange(e, option.label)}
+        onChange={(e) => props.handleChange(e, option.label, "truck_services")}
         {...option}
       />
     ))}
@@ -19,7 +19,7 @@ export function TruckServices({ searchState, setSearchState, handleChange }) {
   useEffect(() => {
     const stateCopy = { ...searchState };
     for (const option of options) {
-      stateCopy[option.label] = false;
+      stateCopy.truck_services[option.label] = false;
     }
     setSearchState(stateCopy);
   }, []);

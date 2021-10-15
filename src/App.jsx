@@ -20,15 +20,21 @@ export default function App() {
   };
 
   //state
-  const [currentView, setCurrentView] = useState();
+  const [currentView, setCurrentView] = useState({ view: "Search" });
   const [locations, setLocations] = useState([]);
-  // const [markers, setMarkers] = useState([]);
+  const [searchState, setSearchState] = useState({
+    amenities: {},
+    restaurants: {},
+    truck_services: {},
+    type: {},
+  });
+  const [locationState, setLocationState] = useState({
+    state: null,
+    city: null,
+    highway: null,
+  });
 
-  //hooks
-  useEffect(() => {
-    getSearch();
-  }, []);
-
+  //fetch locations
   useEffect(() => {
     const controller = new AbortController();
     (async () => {
@@ -44,46 +50,24 @@ export default function App() {
     return () => controller?.abort();
   }, []);
 
-  // useEffect(() => {
-  //   const countryStore = new window.google.maps.MarkerImage(
-  //     "https://freesvg.org/img/Wagonwheel2.png",
-  //     null /* size is determined at runtime */,
-  //     null /* origin is 0,0 */,
-  //     null /* anchor is bottom center of the scaled image */,
-  //     new window.google.maps.Size(32, 32)
-  //   );
-
-  //   const travelStop = new window.google.maps.MarkerImage(
-  //     "https://freesvg.org/img/squat-marker-green.png",
-  //     null /* size is determined at runtime */,
-  //     null /* origin is 0,0 */,
-  //     null /* anchor is bottom center of the scaled image */,
-  //     new window.google.maps.Size(32, 32)
-  //   );
-
-  //   if (locations.length !== 0) {
-  //     const markersArray = [];
-  //     for (const location of locations) {
-  //       const marker = {
-  //         key: location.id,
-  //         position: {
-  //           lat: location.latitude,
-
-  //           lng: location.longitude,
-  //         },
-  //         title: location.name,
-  //         icon: countryStore,
-  //       };
-  //       markersArray.push(marker);
-  //     }
-  //     setMarkers(markersArray);
-  //   }
-  // }, []);
-
-  //handlers
-  function getSearch() {
-    setCurrentView("Search");
-  }
+  // fetch locations
+  useEffect(() => {
+    const controller = new AbortController();
+    (async () => {
+      try {
+        const { data: response } = await axios.get(
+          `/api/filter/${locationState.state}/${locationState.city}`,
+          {
+            signal: controller.signal,
+          }
+        );
+        setLocationState(response);
+      } catch (e) {
+        // handle fetch error
+      }
+    })();
+    return () => controller?.abort();
+  }, []);
 
   return (
     <Grommet theme={theme} className="App" style={{ height: "100%" }}>
@@ -91,10 +75,18 @@ export default function App() {
         {/* <img src={logo} className="App-logo" alt="logo" /> */}
         <h2>Truck Stop Finder</h2>
       </div>
-      <Map id="map" locations={locations} />
-      {currentView === "Search" ? <Search setCurrentView={setCurrentView} /> : null}
-      {currentView === "Results" ? <Results setCurrentView={setCurrentView} /> : null}
-      <Results locations={locations} />
+      <Map id="map" locations={locations} view={"view"} />
+      {currentView.view === "Search" ? (
+        <Search
+          currentView={currentView}
+          setCurrentView={setCurrentView}
+          searchState={searchState}
+          setSearchState={setSearchState}
+          locationState={locationState}
+          setLocationState={setLocationState}
+        />
+      ) : null}
+      {currentView.view === "Results" ? <Results locations={locations} /> : null}
     </Grommet>
   );
 }
