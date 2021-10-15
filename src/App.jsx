@@ -5,8 +5,20 @@ import Search from "./components/Search";
 // import logo from "./logo.svg";
 import "./App.css";
 import axios from "axios";
+import { Box, Grommet } from "grommet";
 
 export default function App() {
+  //Gtommet theme styles
+  const theme = {
+    global: {
+      font: {
+        family: "Roboto",
+        size: "14px",
+        height: "20px",
+      },
+    },
+  };
+
   //state
   const [currentView, setCurrentView] = useState();
   const [locations, setLocations] = useState([]);
@@ -74,18 +86,15 @@ export default function App() {
   }
 
   return (
-    <div className="App" style={{ height: "100%" }}>
+    <Grommet theme={theme} className="App" style={{ height: "100%" }}>
       <div className="App-header">
         {/* <img src={logo} className="App-logo" alt="logo" /> */}
-        <h2>Welcome to React!!!</h2>
+        <h2>Truck Stop Finder</h2>
       </div>
-      <p className="App-intro">
-        To get started, edit <code>src/App.jsx</code> and save to reload.
-      </p>
       <Map id="map" locations={locations} />
       {currentView === "Search" ? <Search setCurrentView={setCurrentView} /> : null}
       {currentView === "Results" ? <Results setCurrentView={setCurrentView} /> : null}
       <Results locations={locations} />
-    </div>
+    </Grommet>
   );
 }

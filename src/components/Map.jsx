@@ -60,8 +60,8 @@ export default function Map(props) {
   return (
     <MyMap
       className="test"
-      containerElement={<div style={{ height: `100%` }} />}
-      mapElement={<div style={{ height: `100%` }} />}
+      containerElement={<div style={{ height: `60vh` }} />}
+      mapElement={<div style={{ height: `60vh` }} />}
       onMapLoad={() => {}}
       onMapClick={() => {}}
       markers={markers}
