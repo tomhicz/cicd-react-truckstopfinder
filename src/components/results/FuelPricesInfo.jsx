@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-//import { ResultWrapper } from "../elements/ResultWrapper";
+import React from "react";
 
-export default function FuelPrices({ fuel }) {
+export default function FuelPricesInfo({ fuel }) {
   //state
 
   //hooks

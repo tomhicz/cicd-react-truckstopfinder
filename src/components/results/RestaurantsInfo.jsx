@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-//import { ResultWrapper } from "../elements/ResultWrapper";
+import React from "react";
 
-export default function Restaurants({ restaurants }) {
+export default function RestaurantsInfo({ restaurants }) {
   //state
 
   //hooks

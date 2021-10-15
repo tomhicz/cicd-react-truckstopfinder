@@ -1,34 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { ResultWrapper } from "../../elements/ResultWrapper";
-import FuelPrices from "./FuelPrices";
-import Amenities from "./Amenities";
-import Restaurants from "./Restaurants";
+import FuelPricesInfo from "./FuelPricesInfo";
+import AmenitiesInfo from "./AmenitiesInfo";
+import RestaurantsInfo from "./RestaurantsInfo";
 import TruckServicesInfo from "./TruckServicesInfo";
 
 export default function Result(props) {
   //state
   const i = props.result;
 
-  // function filterContacts(id, data) {
-  //   return data.ContactMethods.filter((val) => {
-  //     if (val.Type.Id === id && val.Type.IsActive === true) {
-  //       return true;
-  //     }
-  //     return false;
-  //   });
-  // }
-
-  // const tel = i.ContactMethods.filter((val) => {
-  //   if (val.Type.Id === 1 && val.Type.IsActive === true) {
-  //     return true;
-  //   }
-  //   return false;
-  // });
-
-  // const tel = filterContacts(1, i);
-  // const fax = filterContacts(5, i);
-
-  // console.log("tel", tel);
   //hooks
 
   //handlers
@@ -52,9 +32,9 @@ export default function Result(props) {
         <br />
         <TruckServicesInfo truckServices={i.truck_services} />
       </div>
-      <FuelPrices fuel={i.fuel_prices} />
-      <Amenities amenities={i.amenities} />
-      <Restaurants restaurants={i.restaurants} />
+      <FuelPricesInfo fuel={i.fuel_prices} />
+      <AmenitiesInfo amenities={i.amenities} />
+      <RestaurantsInfo restaurants={i.restaurants} />
     </ResultWrapper>
   );
 }
