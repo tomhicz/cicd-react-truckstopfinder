@@ -10,14 +10,21 @@ export default function Restaurants({ restaurants }) {
   const restArr = [];
 
   for (const [key, value] of Object.entries(restaurants)) {
-    restArr.push(value);
+    restArr.push({ id: key, name: value });
   }
 
   return (
     <div>
       Restaurant Icons:
       {restArr.map((val, id) => {
-        return <div key={id}>{val}</div>;
+        return (
+          <img
+            key={val.id}
+            alt={val.name}
+            title={val.name}
+            src={`/media/restaurant-icons/${val.id}.png`}
+          />
+        );
       })}
     </div>
   );
