@@ -30,8 +30,8 @@ export default function App() {
   });
   const [locationState, setLocationState] = useState({
     state: "IL",
-    city: null,
-    highway: null,
+    city: "null",
+    highway: "null",
   });
 
   //fetch locations

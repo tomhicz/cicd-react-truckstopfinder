@@ -15,8 +15,28 @@ const Search = (props) => (
   </div>
 );
 
-export function Amenities({ searchState, setSearchState, handleChange, isLoading, amenities }) {
-  console.log("AMENITIES", amenities);
+export function Amenities({ searchState, setSearchState, handleChange }) {
+  const [isLoading, setLoading] = useState(true);
+  const [amenities, setAmenities] = useState();
+
+  //fetch amenities
+  useEffect(() => {
+    const controller = new AbortController();
+    (async () => {
+      try {
+        const { data: response } = await axios.get("/api/amenities", {
+          signal: controller.signal,
+        });
+        const responseValues = Object.values(response);
+        setAmenities(responseValues);
+        setLoading(false);
+      } catch (e) {
+        // handle fetch error
+      }
+    })();
+    return () => controller?.abort();
+  }, []);
+
   //hooks;
   useEffect(() => {
     if (!isLoading) {
@@ -25,7 +45,6 @@ export function Amenities({ searchState, setSearchState, handleChange, isLoading
       for (const option of amenities) {
         stateCopy[name][option] = false;
       }
-      console.log("---------useEffect---------");
       setSearchState(stateCopy);
     }
   }, [isLoading]);

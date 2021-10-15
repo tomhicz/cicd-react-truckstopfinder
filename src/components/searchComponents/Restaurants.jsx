@@ -1,13 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Checkbox } from "./Checkbox";
+import axios from "axios";
 
 const Search = (props) => (
   <div>
     {props.options.map((option) => (
       <Checkbox
-        key={option.key}
+        key={props.options.indexOf(option)}
         label={option}
-        onChange={(e) => props.handleChange(e, option.label, "restaurants")}
+        onChange={(e) => props.handleChange(e, option, "truck_services", props.isLoading)}
         {...option}
       />
     ))}
@@ -15,33 +16,45 @@ const Search = (props) => (
 );
 
 export function Restaurants({ searchState, setSearchState, handleChange }) {
-  //hooks
+  const [isLoading, setLoading] = useState(true);
+  const [restaurants, setRestaurants] = useState();
+
+  //fetch restaurants
   useEffect(() => {
-    const stateCopy = { ...searchState };
-    for (const option of options) {
-      stateCopy.restaurants[option.label] = false;
-    }
-    setSearchState(stateCopy);
+    const controller = new AbortController();
+    (async () => {
+      try {
+        const { data: response } = await axios.get("/api/restaurants", {
+          signal: controller.signal,
+        });
+        const responseValues = Object.values(response);
+        setRestaurants(responseValues);
+        setLoading(false);
+      } catch (e) {
+        // handle fetch error
+      }
+    })();
+    return () => controller?.abort();
   }, []);
 
-  const options = [
-    {
-      key: 1,
-      label: "Arby's",
-      //   value: oilChange,
-      //   onChange: handleOilChange,
-    },
-    {
-      key: 2,
-      label: "Wendy's",
-      //   value: tirePass,
-      //   onChange: handleTirePass,
-    },
-  ];
+  //hooks;
+  useEffect(() => {
+    if (!isLoading) {
+      const name = "restaurants";
+      const stateCopy = { ...searchState };
+      for (const option of restaurants) {
+        stateCopy[name][option] = false;
+      }
+      setSearchState(stateCopy);
+    }
+  }, [isLoading]);
 
+  if (isLoading) {
+    return <div></div>;
+  }
   return (
     <div>
-      <Search options={options} handleChange={handleChange}></Search>
+      <Search options={restaurants} handleChange={handleChange} isLoading={isLoading}></Search>
     </div>
   );
 }

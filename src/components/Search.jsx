@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { TruckServices, Types, Amenities, Restaurants, Dropdown, Button } from "./searchComponents";
+import { Types, Amenities, Restaurants, Dropdown, Button } from "./searchComponents";
 import { SearchWrapper } from "../elements";
-import axios from "axios";
 
 export default function Search({
   currentView,
@@ -11,31 +10,13 @@ export default function Search({
   locationState,
   setLocationState,
 }) {
-  const [isLoading, setLoading] = useState(true);
-  const [amenities, setAmenities] = useState();
-
-  //fetch amenities
-  useEffect(() => {
-    const controller = new AbortController();
-    (async () => {
-      try {
-        const { data: response } = await axios.get("/api/amenities", {
-          signal: controller.signal,
-        });
-        const responseValues = Object.values(response);
-        setAmenities(responseValues);
-        setLoading(false);
-        console.log("----------AMENITIES FETCH---------");
-      } catch (e) {
-        // handle fetch error
-      }
-    })();
-    return () => controller?.abort();
-  }, []);
-
   //hooks
   useEffect(() => {
     console.log("real state", searchState);
+  }, [searchState]);
+  //hooks
+  useEffect(() => {
+    console.log("location state", locationState);
   }, [searchState]);
 
   //handlers
@@ -62,15 +43,10 @@ export default function Search({
 
   return (
     <SearchWrapper>
-      {/* <Dropdown
+      <Dropdown
         locationState={locationState}
         setLocationState={setLocationState}
         handleChange={handleDropdown}
-      /> */}
-      <TruckServices
-        searchState={searchState}
-        setSearchState={setSearchState}
-        handleChange={handleChange}
       />
       <Types
         searchState={searchState}
@@ -81,8 +57,6 @@ export default function Search({
         searchState={searchState}
         setSearchState={setSearchState}
         handleChange={handleChange}
-        isLoading={isLoading}
-        amenities={amenities}
       />
       <Restaurants
         searchState={searchState}
