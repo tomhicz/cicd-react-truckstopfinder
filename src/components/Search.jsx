@@ -1,21 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { TruckServices, Types, Amenities, Restaurants, Dropdown } from "./searchComponents";
+import React, { useEffect } from "react";
+import { TruckServices, Types, Amenities, Restaurants, Dropdown, Button } from "./searchComponents";
 import { SearchWrapper } from "../elements";
 
-export default function Search() {
-  //state
-  const [searchState, setSearchState] = useState({
-    amenities: {},
-    restaurants: {},
-    truck_services: {},
-    type: {},
-  });
-  const [locationState, setLocationState] = useState({
-    state: null,
-    city: null,
-    highway: null,
-  });
-
+export default function Search({
+  currentView,
+  setCurrentView,
+  searchState,
+  setSearchState,
+  locationState,
+  setLocationState,
+}) {
   //hooks
   useEffect(() => {
     console.log("real state", searchState);
@@ -26,6 +20,14 @@ export default function Search() {
     const stateCopy = { ...searchState };
     stateCopy[type][label] = !stateCopy[type][label];
     setSearchState(stateCopy);
+  };
+
+  //handlers
+  const handleClick = (e, view) => {
+    const stateCopy = { ...currentView };
+    stateCopy[view] = "Results";
+    setCurrentView(stateCopy);
+    console.log("curView from Search", currentView);
   };
 
   return (
@@ -55,6 +57,7 @@ export default function Search() {
         setSearchState={setSearchState}
         handleChange={handleChange}
       />
+      <Button type="submit" currentView={currentView} handleClick={handleClick} />
     </SearchWrapper>
   );
 }
