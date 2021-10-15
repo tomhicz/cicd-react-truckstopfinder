@@ -1,41 +1,93 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 export function Dropdown({ locationState, setLocationState, handleChange }) {
-  //hooks
-  //   useEffect(() => {
+  const [isLoading, setLoading] = useState(true);
+  const [stateState, setStateState] = useState();
+  const [cityState, setCityState] = useState();
+
+  let locationData;
+  console.log("locationState.state", locationState.state);
+  //fetch locations
+  useEffect(() => {
+    const controller = new AbortController();
+    (async () => {
+      if (locationState.state !== "null") {
+        try {
+          const { data: response } = await axios.get(
+            `/api/filter/${locationState.state}/${locationState.city}`,
+            {
+              signal: controller.signal,
+            }
+          );
+          console.log("----------LOCATIONS FETCH---------");
+          console.log("RESPONSE", response);
+          setCityState(response);
+          console.log("TEMPLOCATIONS", cityState);
+          console.log("locationState", locationState);
+          setLoading(false);
+        } catch (e) {
+          // handle fetch error
+        }
+      } else
+        try {
+          const { data: response } = await axios.get(
+            `/api/filter/${locationState.state}/${locationState.city}`,
+            {
+              signal: controller.signal,
+            }
+          );
+          console.log("----------LOCATIONS FETCH---------");
+          console.log("RESPONSE", response);
+          setStateState(response);
+          console.log("TEMPLOCATIONS", stateState);
+          console.log("locationState", locationState);
+          setLoading(false);
+        } catch (e) {
+          // handle fetch error
+        }
+    })();
+    return () => controller?.abort();
+  }, []);
+
+  //hooks;
+  // useEffect(() => {
+  //   if (!isLoading) {
+  //     const name = "tempLocations";
   //     const stateCopy = { ...locationState };
-  //     for (const option of options) {
-  //       stateCopy.truck_services[option.label] = false;
+  //     for (const option of tempLocations) {
+  //       stateCopy[name][option] = false;
   //     }
   //     setSearchState(stateCopy);
-  //   }, []);
+  //   }
+  // }, [isLoading]);
 
-  function createSelectItems() {
+  function createStateDropdown() {
+    const locationData2 = cityState;
     const items = [];
-    for (let i = 0; i <= locationState; i++) {
+    for (const city of locationData2) {
+      let i;
       items.push(
-        <option key={i} value={i}>
-          {i}
+        <option key={i} value={city}>
+          {city}
         </option>
       );
-      //here I will be creating my options dynamically based on
-      //what props are currently passed to the parent component
+      i++;
     }
+    return items;
   }
 
-  function onDropdownSelected(e) {
+  function onStateDropdown(e) {
     console.log("THE VAL", e.target.value);
     //here you will see the current selected value of the select input
   }
+
+  if (isLoading) {
+    return <div></div>;
+  }
   return (
     <div>
-      <select id="dropdown">
-        <option value="N/A">N/A</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-      </select>
+      <select label="State">{createStateDropdown()}</select>
     </div>
   );
 }

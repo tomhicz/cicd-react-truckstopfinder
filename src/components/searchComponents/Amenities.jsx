@@ -1,13 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Checkbox } from "./Checkbox";
+import axios from "axios";
 
 const Search = (props) => (
   <div>
     {props.options.map((option) => (
       <Checkbox
-        key={option.key}
+        key={props.options.indexOf(option)}
         label={option}
-        onChange={(e) => props.handleChange(e, option.label, "amenities")}
+        onChange={(e) => props.handleChange(e, option, "amenities", props.isLoading)}
         {...option}
       />
     ))}
@@ -15,45 +16,45 @@ const Search = (props) => (
 );
 
 export function Amenities({ searchState, setSearchState, handleChange }) {
-  //hooks
+  const [isLoading, setLoading] = useState(true);
+  const [amenities, setAmenities] = useState();
+
+  //fetch amenities
   useEffect(() => {
-    const stateCopy = { ...searchState };
-    for (const option of options) {
-      stateCopy.amenities[option.label] = false;
-    }
-    setSearchState(stateCopy);
+    const controller = new AbortController();
+    (async () => {
+      try {
+        const { data: response } = await axios.get("/api/amenities", {
+          signal: controller.signal,
+        });
+        const responseValues = Object.values(response);
+        setAmenities(responseValues);
+        setLoading(false);
+      } catch (e) {
+        // handle fetch error
+      }
+    })();
+    return () => controller?.abort();
   }, []);
 
-  const options = [
-    {
-      key: 1,
-      label: "Private Showers",
-      //   value: oilChange,
-      //   onChange: handleOilChange,
-    },
-    {
-      key: 2,
-      label: "CAT Scales",
-      //   value: tirePass,
-      //   onChange: handleTirePass,
-    },
-    {
-      key: 3,
-      label: "Wifi",
-      //   value: lightMechanical,
-      //   onChange: handleLightMechanical,
-    },
-    {
-      key: 4,
-      label: "ATM",
-      //   value: truckTireCare,
-      //   onChange: handleTruckTireCare,
-    },
-  ];
+  //hooks;
+  useEffect(() => {
+    if (!isLoading) {
+      const name = "amenities";
+      const stateCopy = { ...searchState };
+      for (const option of amenities) {
+        stateCopy[name][option] = false;
+      }
+      setSearchState(stateCopy);
+    }
+  }, [isLoading]);
 
+  if (isLoading) {
+    return <div></div>;
+  }
   return (
     <div>
-      <Search options={options} handleChange={handleChange}></Search>
+      <Search options={amenities} handleChange={handleChange} isLoading={isLoading}></Search>
     </div>
   );
 }
