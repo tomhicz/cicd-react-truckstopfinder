@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { ResultWrapper } from "../elements/ResultWrapper";
+import { ResultWrapper } from "../../elements/ResultWrapper";
 import FuelPrices from "./FuelPrices";
 import Amenities from "./Amenities";
 import Restaurants from "./Restaurants";
+import TruckServicesInfo from "./TruckServicesInfo";
 
 export default function Result(props) {
   //state
@@ -35,13 +36,13 @@ export default function Result(props) {
   return (
     <ResultWrapper>
       <div>
-        <h3>{i.addresses[0].Name}</h3>
+        <h3>{i.addresses.Name}</h3>
         Exit {i.highwayAndExit.exit} | {i.highwayAndExit.highway} | Store #{i.id}
       </div>
       <div>
-        {i.addresses[0].Address1} {i.addresses[0].Address2} {i.addresses[0].City}{" "}
-        {i.addresses[0].County} {i.addresses[0].State}
-        {i.addresses[0].Zip}
+        {i.addresses.Address1} {i.addresses.Address2} {i.addresses.City} {i.addresses.County}{" "}
+        {i.addresses.State}
+        {i.addresses.Zip}
       </div>
       <hr />
       <div>
@@ -49,7 +50,7 @@ export default function Result(props) {
         <br />
         Fax: {i.contact.Fax}
         <br />
-        Insert truck services here
+        <TruckServicesInfo truckServices={i.truck_services} />
       </div>
       <FuelPrices fuel={i.fuel_prices} />
       <Amenities amenities={i.amenities} />

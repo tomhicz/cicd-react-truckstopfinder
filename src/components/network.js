@@ -1,4 +1,64 @@
 export async function query() {
+  /*
+[
+  {"id":368,
+  "latitude":32.84415,
+  "longitude":-86.591965,
+  "name":"Site 368",
+  "addresses":
+  [
+    {
+      "Zip":"35045",
+      "City":"Clanton",
+      "Name":"Clanton - 368",
+      "State":"AL",
+      "County":null,
+      "Address1":"300 Arby Dr.",
+      "Address2":"",
+      "Comments":"",
+      "AddressId":1209,
+      "AddressTypeId":1,
+      "SpecialInstructions":""
+    }
+  ],
+  "highwayAndExit":{
+    "exit":"208",
+    "highway":"I-65"
+  },
+  "restaurants":["Arby's"],
+  "type":"Travel Stop",
+  "fuel_prices":{
+    "DEF":2.759,
+    "PREMIUM":2.499,
+    "MIDGRADE":2.249,
+    "UNLEADED":1.999,
+    "DIESEL B15":2.429
+  },
+  "contact":{
+    "Fax":"(205) 755-8694",
+    "Main Email":"Store368@example.com",
+    "Main Phone":"(205) 755-8104",
+    "Rollover Phone":"(205) 755-8352"
+  },
+  "amenities":[
+    "Private Showers",
+    "CAT Scales",
+    "WiFi",
+    "ATM",
+    "Transflo",
+    "Truck Parking",
+    "RV Dump Service",
+    "Bulk DEF",
+    "RFID Pump Start"
+  ],
+  "truck_services":[
+    "Truck Tire Care",
+    "Light Mechanical",
+    "TirePass"
+  ]
+},
+*/
+
   const db = [
     {
       AcceptedPaymentTypes: [
