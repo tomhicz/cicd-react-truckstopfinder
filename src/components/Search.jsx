@@ -29,10 +29,11 @@ export default function Search({
     }
   };
 
-  const handleDropdown = (e, key, value) => {
+  const handleDropdown = (key, value) => {
     const stateCopy = { ...locationState };
     stateCopy[key] = value;
     setLocationState(stateCopy);
+    console.log("HANDLEDROPDOWN", locationState);
   };
 
   const handleClick = (e, view) => {
@@ -46,7 +47,6 @@ export default function Search({
       <Dropdown
         locationState={locationState}
         setLocationState={setLocationState}
-        handleChange={handleDropdown}
         handleDropdown={handleDropdown}
       />
       <TruckServices
