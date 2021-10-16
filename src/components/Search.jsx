@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Types, Amenities, Restaurants, Dropdown, Button, TruckServices } from "./searchComponents";
 import { SearchWrapper } from "../elements";
-import { Card } from "grommet";
+import { Card, CardHeader } from "grommet";
 
 export default function Search({
   currentView,
@@ -46,6 +46,9 @@ export default function Search({
   return (
     <SearchWrapper>
       <Card pad="small" background="light-1" margin="xsmall">
+        <CardHeader>
+          <h3>Locations:</h3>
+        </CardHeader>
         <Dropdown
           locationState={locationState}
           setLocationState={setLocationState}
@@ -53,6 +56,9 @@ export default function Search({
         />
       </Card>
       <Card pad="small" background="light-1" margin="xsmall">
+        <CardHeader>
+          <h3>Truck Services:</h3>
+        </CardHeader>
         <TruckServices
           searchState={searchState}
           setSearchState={setSearchState}
@@ -60,6 +66,9 @@ export default function Search({
         />
       </Card>
       <Card pad="small" background="light-1" margin="xsmall">
+        <CardHeader>
+          <h3>Type:</h3>
+        </CardHeader>
         <Types
           searchState={searchState}
           setSearchState={setSearchState}
@@ -67,6 +76,9 @@ export default function Search({
         />
       </Card>
       <Card pad="small" background="light-1" margin="xsmall">
+        <CardHeader>
+          <h3>Amenities:</h3>
+        </CardHeader>
         <Amenities
           searchState={searchState}
           setSearchState={setSearchState}
@@ -74,6 +86,9 @@ export default function Search({
         />
       </Card>
       <Card pad="small" background="light-1" margin="xsmall">
+        <CardHeader>
+          <h3>Restaurants:</h3>
+        </CardHeader>
         <Restaurants
           searchState={searchState}
           setSearchState={setSearchState}
