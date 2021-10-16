@@ -4,4 +4,6 @@ import theme from "../themes/theme";
 
 export const SearchWrapper = styled.section`
   text-align: center;
+  background-color: #dadada;
+  padding: 10px;
 `;

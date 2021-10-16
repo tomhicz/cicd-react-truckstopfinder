@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Types, Amenities, Restaurants, Dropdown, Button, TruckServices } from "./searchComponents";
 import { SearchWrapper } from "../elements";
+import { Card } from "grommet";
 
 export default function Search({
   currentView,
@@ -44,31 +45,41 @@ export default function Search({
 
   return (
     <SearchWrapper>
-      <Dropdown
-        locationState={locationState}
-        setLocationState={setLocationState}
-        handleDropdown={handleDropdown}
-      />
-      <TruckServices
-        searchState={searchState}
-        setSearchState={setSearchState}
-        handleChange={handleChange}
-      />
-      <Types
-        searchState={searchState}
-        setSearchState={setSearchState}
-        handleChange={handleChange}
-      />
-      <Amenities
-        searchState={searchState}
-        setSearchState={setSearchState}
-        handleChange={handleChange}
-      />
-      <Restaurants
-        searchState={searchState}
-        setSearchState={setSearchState}
-        handleChange={handleChange}
-      />
+      <Card pad="small" background="light-1" margin="xsmall">
+        <Dropdown
+          locationState={locationState}
+          setLocationState={setLocationState}
+          handleDropdown={handleDropdown}
+        />
+      </Card>
+      <Card pad="small" background="light-1" margin="xsmall">
+        <TruckServices
+          searchState={searchState}
+          setSearchState={setSearchState}
+          handleChange={handleChange}
+        />
+      </Card>
+      <Card pad="small" background="light-1" margin="xsmall">
+        <Types
+          searchState={searchState}
+          setSearchState={setSearchState}
+          handleChange={handleChange}
+        />
+      </Card>
+      <Card pad="small" background="light-1" margin="xsmall">
+        <Amenities
+          searchState={searchState}
+          setSearchState={setSearchState}
+          handleChange={handleChange}
+        />
+      </Card>
+      <Card pad="small" background="light-1" margin="xsmall">
+        <Restaurants
+          searchState={searchState}
+          setSearchState={setSearchState}
+          handleChange={handleChange}
+        />
+      </Card>
       <Button type="submit" currentView={currentView} handleClick={handleClick} />
     </SearchWrapper>
   );
