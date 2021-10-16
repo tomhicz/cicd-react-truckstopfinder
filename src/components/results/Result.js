@@ -20,10 +20,10 @@ export default function Result(props) {
       <CardHeader pad="medium">
         <h3>{i.addresses.Name}</h3>
       </CardHeader>
-      <CardBody pad={{ horizontal: "medium" }}>
+      <CardBody pad={{ horizontal: "medium", bottom: "medium" }}>
         <Grid
           fill="horizontal"
-          rows={["xxsmall", "small", "small"]}
+          rows={["xxsmall", "flex", "flex"]}
           columns={["flex", "flex"]}
           gap="small"
           areas={[

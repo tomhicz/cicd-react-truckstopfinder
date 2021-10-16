@@ -1,20 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function RestaurantsInfo({ restaurants }) {
-  //Styles
-  const StyledIcon = styled.div`
-    display: inline-flex;
-    justify-content: center;
-    alignitems: center;
-    height: 80px;
-    width: 80px;
-    background-color: #ffffff;
-    margin: 4px;
-    border-radius: 12px;
-    overflow: hidden;
-  `;
+//Styles
+const StyledIcon = styled.div`
+  display: inline-flex;
+  justify-content: center;
+  alignitems: center;
+  height: 80px;
+  width: 80px;
+  background-color: #ffffff;
+  margin: 4px;
+  border-radius: 12px;
+  overflow: hidden;
+`;
 
+export default function RestaurantsInfo({ restaurants }) {
   //state
 
   //hooks
