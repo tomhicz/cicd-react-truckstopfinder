@@ -15,7 +15,7 @@ export default function AmenitiesInfo({ amenities }) {
 
   return (
     <div>
-      Amenities:
+      <h3>Amenities:</h3>
       {amenArr.map((name, id) => {
         return <div key={id}>{name}</div>;
       })}

@@ -18,16 +18,6 @@ export default function Results(props) {
 
   return (
     <ResultsWrapper>
-      <Box
-        tag="header"
-        align="center"
-        justify="between"
-        background="light-3"
-        pad={{ vertical: "small", horizontal: "medium" }}
-        elevation="medium"
-      >
-        Results which are wrapped
-      </Box>
       {results.map((val) => {
         return <Result key={val.id} result={val} />;
       })}

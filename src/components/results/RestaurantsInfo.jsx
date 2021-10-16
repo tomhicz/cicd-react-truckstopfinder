@@ -1,6 +1,20 @@
 import React from "react";
+import styled from "styled-components";
 
 export default function RestaurantsInfo({ restaurants }) {
+  //Styles
+  const StyledIcon = styled.div`
+    display: inline-flex;
+    justify-content: center;
+    alignitems: center;
+    height: 80px;
+    width: 80px;
+    background-color: #ffffff;
+    margin: 4px;
+    border-radius: 12px;
+    overflow: hidden;
+  `;
+
   //state
 
   //hooks
@@ -14,15 +28,17 @@ export default function RestaurantsInfo({ restaurants }) {
 
   return (
     <div>
-      Restaurant Icons:
+      <h3>Restaurants:</h3>
       {restArr.map((val, id) => {
         return (
-          <img
-            key={val.id}
-            alt={val.name}
-            title={val.name}
-            src={`/media/restaurant-icons/${val.id}.png`}
-          />
+          <StyledIcon key={val.id}>
+            <img
+              alt={val.name}
+              title={val.name}
+              src={`/media/restaurant-icons/${val.id}.png`}
+              style={{ maxWidth: "80px", maxHeight: "80px", objectFit: "contain" }}
+            />
+          </StyledIcon>
         );
       })}
     </div>

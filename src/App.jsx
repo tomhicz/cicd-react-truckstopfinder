@@ -13,7 +13,7 @@ export default function App() {
     global: {
       font: {
         family: "Roboto",
-        size: "14px",
+        size: "16px",
         height: "20px",
       },
     },
