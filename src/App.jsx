@@ -76,6 +76,7 @@ export default function App() {
           currentView={currentView}
           setCurrentView={setCurrentView}
           filters={searchState}
+          locationState={locationState}
         />
       ) : null}
     </Grommet>
