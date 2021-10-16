@@ -3,17 +3,17 @@ import axios from "axios";
 
 export function Dropdown({ locationState, setLocationState, handleChange }) {
   const [isLoading, setLoading] = useState(true);
-  const [stateState, setStateState] = useState();
-  const [cityState, setCityState] = useState();
-  const [highwayState, setHighwayState] = useState();
+  const [stateState, setStateState] = useState("");
+  const [cityState, setCityState] = useState("");
+  const [highwayState, setHighwayState] = useState("");
 
-  let locationData;
+  //let locationData;
   console.log("locationState.state", locationState.state);
   //fetch locations
   useEffect(() => {
     const controller = new AbortController();
     (async () => {
-      if (locationState.state === "null" && locationState.city === "null") {
+      if (locationState.state === "-" && locationState.city === "-") {
         try {
           const { data: response } = await axios.get(
             `/api/filter/${locationState.state}/${locationState.city}`,
@@ -30,7 +30,7 @@ export function Dropdown({ locationState, setLocationState, handleChange }) {
         } catch (e) {
           // handle fetch error
         }
-      } else if (locationState.state !== "null") {
+      } else if (locationState.state !== "-") {
         try {
           const { data: response } = await axios.get(
             `/api/filter/${locationState.state}/${locationState.city}`,
@@ -47,7 +47,7 @@ export function Dropdown({ locationState, setLocationState, handleChange }) {
         } catch (e) {
           // handle fetch error
         }
-      } else if (locationState.city !== "null") {
+      } else if (locationState.city !== "-") {
         try {
           const { data: response } = await axios.get(
             `/api/filter/${locationState.state}/${locationState.city}`,
@@ -67,7 +67,7 @@ export function Dropdown({ locationState, setLocationState, handleChange }) {
       }
     })();
     return () => controller?.abort();
-  }, []);
+  }, [setStateState]);
 
   //hooks;
   // useEffect(() => {
@@ -124,10 +124,10 @@ export function Dropdown({ locationState, setLocationState, handleChange }) {
     return items;
   }
 
-  function onStateDropdown(e) {
-    console.log("THE VAL", e.target.value);
-    //here you will see the current selected value of the select input
-  }
+  // function onStateDropdown(e) {
+  //   console.log("THE VAL", e.target.value);
+  //   //here you will see the current selected value of the select input
+  // }
 
   if (isLoading) {
     return <div></div>;
