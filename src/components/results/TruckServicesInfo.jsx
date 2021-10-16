@@ -15,7 +15,7 @@ export default function TruckServicesInfo({ truckServices }) {
 
   return (
     <div>
-      Truck Services:
+      <h3>Truck Services:</h3>
       {truckArr.map((name, id) => {
         return <div key={id}>{name}</div>;
       })}

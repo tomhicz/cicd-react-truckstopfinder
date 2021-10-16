@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Map from "./components/Map";
 import Results from "./components/Results";
 import Search from "./components/Search";
-// import logo from "./logo.svg";
+import logo from "./logo.png";
 import "./App.css";
 import axios from "axios";
 import { Box, Grommet } from "grommet";
@@ -13,7 +13,7 @@ export default function App() {
     global: {
       font: {
         family: "Roboto",
-        size: "14px",
+        size: "16px",
         height: "20px",
       },
     },
@@ -54,8 +54,10 @@ export default function App() {
   return (
     <Grommet theme={theme} className="App" style={{ height: "100%" }}>
       <div className="App-header">
-        {/* <img src={logo} className="App-logo" alt="logo" /> */}
-        <h2>Truck Stop Finder</h2>
+        <a href="/">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h2>Truck Stop Finder</h2>
+        </a>
       </div>
       <Map id="map" locations={locations} view={"view"} />
       {currentView.view === "Search" ? (
@@ -69,7 +71,11 @@ export default function App() {
         />
       ) : null}
       {currentView.view === "Results" ? (
-        <Results locations={locations} filters={searchState} />
+
+
+
+        <Results locations={locations} currentView={currentView} setCurrentView={setCurrentView} />
+ staging
       ) : null}
     </Grommet>
   );
