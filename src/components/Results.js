@@ -7,10 +7,10 @@ import Result from "./results/Result";
 
 export default function Results({
   locations,
-  currentView,
   setCurrentView,
   filters,
   locationState,
+  setLocationState,
 }) {
   //state
   const [results, setResults] = useState([]);
@@ -69,7 +69,19 @@ export default function Results({
         return <Result key={val.id} result={val} />;
       })}
       <Box alignContent="center" direction="row" justify="around" pad="small">
-        <button key={1} onClick={(e) => setCurrentView({ view: "Search" })}>
+        <button
+          key={1}
+          onClick={(e) =>
+            setCurrentView(
+              { view: "Search" },
+              setLocationState({
+                state: "-",
+                city: "-",
+                highway: "-",
+              })
+            )
+          }
+        >
           Search Again
         </button>
       </Box>
