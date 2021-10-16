@@ -29,9 +29,9 @@ export default function App() {
     type: {},
   });
   const [locationState, setLocationState] = useState({
-    state: "IL",
-    city: "null",
-    highway: "null",
+    state: "-",
+    city: "-",
+    highway: "-",
   });
 
   //fetch locations
