@@ -68,7 +68,9 @@ export default function App() {
           setLocationState={setLocationState}
         />
       ) : null}
-      {currentView.view === "Results" ? <Results locations={locations} /> : null}
+      {currentView.view === "Results" ? (
+        <Results locations={locations} filters={searchState} />
+      ) : null}
     </Grommet>
   );
 }

@@ -9,7 +9,7 @@ const Search = (props) => (
 );
 
 export function Button({ locationState, setLocationState, handleClick, currentView }) {
-  console.log("curView from Button", currentView);
+  //console.log("curView from Button", currentView);
 
   return (
     <div>

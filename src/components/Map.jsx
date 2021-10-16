@@ -37,7 +37,7 @@ const MyMap = withGoogleMap((props) => (
 
 // We use object destructuring here to shorten our code
 export default function Map(props) {
-  console.log(props.locations);
+  //console.log(props.locations);
   const markers = [];
   let iconImage;
   for (const location of props.locations) {

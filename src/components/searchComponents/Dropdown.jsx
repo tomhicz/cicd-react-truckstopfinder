@@ -67,7 +67,7 @@ export function Dropdown({ locationState, setLocationState, handleChange }) {
       }
     })();
     return () => controller?.abort();
-  }, [setStateState]);
+  }, []);
 
   //hooks;
   // useEffect(() => {
@@ -128,13 +128,17 @@ export function Dropdown({ locationState, setLocationState, handleChange }) {
   //   console.log("THE VAL", e.target.value);
   //   //here you will see the current selected value of the select input
   // }
-
+  const handleChange2 = (event) => {
+    console.log("Genre Changed", event);
+  };
   if (isLoading) {
     return <div></div>;
   }
   return (
     <div>
-      <select label="State">{createStateDropdown()}</select>
+      <select label="State">
+        {createStateDropdown()} onBlur={(event) => handleChange2(event.target.value)}
+      </select>
       <select label="City">{createCityDropdown()}</select>
       <select label="Highway">{createHighwayDropdown()}</select>
     </div>
