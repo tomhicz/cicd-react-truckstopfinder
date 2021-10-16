@@ -5,6 +5,7 @@ export function Dropdown({ locationState, setLocationState, handleChange }) {
   const [isLoading, setLoading] = useState(true);
   const [stateState, setStateState] = useState();
   const [cityState, setCityState] = useState();
+  const [highwayState, setHighwayState] = useState();
 
   let locationData;
   console.log("locationState.state", locationState.state);
@@ -12,7 +13,7 @@ export function Dropdown({ locationState, setLocationState, handleChange }) {
   useEffect(() => {
     const controller = new AbortController();
     (async () => {
-      if (locationState.state !== "null") {
+      if (locationState.state === "null" && locationState.city === "null") {
         try {
           const { data: response } = await axios.get(
             `/api/filter/${locationState.state}/${locationState.city}`,
@@ -20,16 +21,16 @@ export function Dropdown({ locationState, setLocationState, handleChange }) {
               signal: controller.signal,
             }
           );
-          console.log("----------LOCATIONS FETCH---------");
+          console.log("----------LOCATIONS STATE FETCH---------");
           console.log("RESPONSE", response);
-          setCityState(response);
+          setStateState(response);
           console.log("TEMPLOCATIONS", cityState);
           console.log("locationState", locationState);
           setLoading(false);
         } catch (e) {
           // handle fetch error
         }
-      } else
+      } else if (locationState.state !== "null") {
         try {
           const { data: response } = await axios.get(
             `/api/filter/${locationState.state}/${locationState.city}`,
@@ -37,15 +38,33 @@ export function Dropdown({ locationState, setLocationState, handleChange }) {
               signal: controller.signal,
             }
           );
-          console.log("----------LOCATIONS FETCH---------");
+          console.log("----------LOCATIONS CITY FETCH---------");
           console.log("RESPONSE", response);
-          setStateState(response);
+          setCityState(response);
           console.log("TEMPLOCATIONS", stateState);
           console.log("locationState", locationState);
           setLoading(false);
         } catch (e) {
           // handle fetch error
         }
+      } else if (locationState.city !== "null") {
+        try {
+          const { data: response } = await axios.get(
+            `/api/filter/${locationState.state}/${locationState.city}`,
+            {
+              signal: controller.signal,
+            }
+          );
+          console.log("----------LOCATIONS HIGHWAY FETCH---------");
+          console.log("RESPONSE", response);
+          setHighwayState(response);
+          console.log("TEMPLOCATIONS", stateState);
+          console.log("locationState", locationState);
+          setLoading(false);
+        } catch (e) {
+          // handle fetch error
+        }
+      }
     })();
     return () => controller?.abort();
   }, []);
@@ -63,6 +82,20 @@ export function Dropdown({ locationState, setLocationState, handleChange }) {
   // }, [isLoading]);
 
   function createStateDropdown() {
+    const locationData1 = stateState;
+    const items = [];
+    for (const state of locationData1) {
+      let i;
+      items.push(
+        <option key={i} value={state}>
+          {state}
+        </option>
+      );
+      i++;
+    }
+    return items;
+  }
+  function createCityDropdown() {
     const locationData2 = cityState;
     const items = [];
     for (const city of locationData2) {
@@ -70,6 +103,20 @@ export function Dropdown({ locationState, setLocationState, handleChange }) {
       items.push(
         <option key={i} value={city}>
           {city}
+        </option>
+      );
+      i++;
+    }
+    return items;
+  }
+  function createHighwayDropdown() {
+    const locationData3 = highwayState;
+    const items = [];
+    for (const hwy of locationData3) {
+      let i;
+      items.push(
+        <option key={i} value={hwy}>
+          {hwy}
         </option>
       );
       i++;
@@ -88,6 +135,8 @@ export function Dropdown({ locationState, setLocationState, handleChange }) {
   return (
     <div>
       <select label="State">{createStateDropdown()}</select>
+      <select label="City">{createCityDropdown()}</select>
+      <select label="Highway">{createHighwayDropdown()}</select>
     </div>
   );
 }

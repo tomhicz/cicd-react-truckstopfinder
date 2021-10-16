@@ -47,6 +47,7 @@ export default function Search({
         locationState={locationState}
         setLocationState={setLocationState}
         handleChange={handleDropdown}
+        handleDropdown={handleDropdown}
       />
       <TruckServices
         searchState={searchState}
