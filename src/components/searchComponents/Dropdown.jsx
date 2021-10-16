@@ -45,9 +45,6 @@ export function Dropdown({ locationState, setLocationState, handleDropdown }) {
           console.log("----------LOCATIONS CITY FETCH---------");
           console.log("RESPONSE", response);
           setCityList(response);
-          if (response.length === 1) {
-            setCityState(response[0]);
-          }
           console.log("locationState", locationState);
           setLoading(false);
         } catch (e) {
@@ -98,7 +95,7 @@ export function Dropdown({ locationState, setLocationState, handleDropdown }) {
       i++;
     }
     items.push(
-      <option selected="State" key={0} value={""}>
+      <option selected="State" key={0} value={"-"}>
         {"State"}
       </option>
     );
@@ -116,7 +113,7 @@ export function Dropdown({ locationState, setLocationState, handleDropdown }) {
       i++;
     }
     items.push(
-      <option selected="City" key={0} value={""}>
+      <option selected="City" key={0} value={"-"}>
         {"City"}
       </option>
     );
