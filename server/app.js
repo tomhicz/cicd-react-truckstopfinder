@@ -68,10 +68,10 @@ app.get("/api/filter/:state/:city", async (req, res) => {
       loc.highwayAndExit.highway,
     ]);
 
-    if (req.params.state === "null" && req.params.city === "null") {
+    if (req.params.state === "-" && req.params.city === "-") {
       const resultState = _.uniq(stCtyHwy.map((st) => st[0]));
       res.json(resultState);
-    } else if (req.params.state && req.params.city === "null") {
+    } else if (req.params.state && req.params.city === "-") {
       const resultCity = [];
       stCtyHwy.forEach((element) => {
         if (element[0] === req.params.state && !resultCity.includes(element[1])) {

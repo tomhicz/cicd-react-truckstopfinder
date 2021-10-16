@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { TruckServices, Types, Amenities, Restaurants, Dropdown, Button } from "./searchComponents";
+import React, { useState, useEffect } from "react";
+import { Types, Amenities, Restaurants, Dropdown, Button, TruckServices } from "./searchComponents";
 import { SearchWrapper } from "../elements";
 
 export default function Search({
@@ -14,20 +14,31 @@ export default function Search({
   useEffect(() => {
     console.log("real state", searchState);
   }, [searchState]);
+  //hooks
+  useEffect(() => {
+    console.log("location state", locationState);
+  }, [searchState]);
 
   //handlers
-  const handleChange = (e, label, type) => {
-    const stateCopy = { ...searchState };
-    stateCopy[type][label] = !stateCopy[type][label];
-    setSearchState(stateCopy);
+  const handleChange = (e, label, type, isLoading = false) => {
+    if (!isLoading) {
+      const stateCopy = { ...searchState };
+      stateCopy[type][label] = !stateCopy[type][label];
+      setSearchState(stateCopy);
+      console.log("HANDLECHANGE");
+    }
   };
 
-  //handlers
+  const handleDropdown = (e, key, value) => {
+    const stateCopy = { ...locationState };
+    stateCopy[key] = value;
+    setLocationState(stateCopy);
+  };
+
   const handleClick = (e, view) => {
     const stateCopy = { ...currentView };
     stateCopy[view] = "Results";
     setCurrentView(stateCopy);
-    console.log("curView from Search", currentView);
   };
 
   return (
@@ -35,7 +46,8 @@ export default function Search({
       <Dropdown
         locationState={locationState}
         setLocationState={setLocationState}
-        handleChange={handleChange}
+        handleChange={handleDropdown}
+        handleDropdown={handleDropdown}
       />
       <TruckServices
         searchState={searchState}

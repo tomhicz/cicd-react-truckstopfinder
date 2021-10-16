@@ -29,9 +29,9 @@ export default function App() {
     type: {},
   });
   const [locationState, setLocationState] = useState({
-    state: null,
-    city: null,
-    highway: null,
+    state: "-",
+    city: "-",
+    highway: "-",
   });
 
   //fetch locations
@@ -43,25 +43,7 @@ export default function App() {
           signal: controller.signal,
         });
         setLocations(response);
-      } catch (e) {
-        // handle fetch error
-      }
-    })();
-    return () => controller?.abort();
-  }, []);
-
-  // fetch locations
-  useEffect(() => {
-    const controller = new AbortController();
-    (async () => {
-      try {
-        const { data: response } = await axios.get(
-          `/api/filter/${locationState.state}/${locationState.city}`,
-          {
-            signal: controller.signal,
-          }
-        );
-        setLocationState(response);
+        console.log("---------LOCATIONS FETCH---------");
       } catch (e) {
         // handle fetch error
       }
