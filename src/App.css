@@ -29,3 +29,14 @@
 .App-intro {
   font-size: large;
 }
+
+button {
+  color: white;
+  padding: 10px;
+  margin: 10px;
+  border: 0;
+  background: none;
+  -webkit-appearance: none;
+  background-color: #f13434;
+  border-radius: 5px;
+}
