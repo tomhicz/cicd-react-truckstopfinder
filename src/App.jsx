@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Map from "./components/Map";
 import Results from "./components/Results";
 import Search from "./components/Search";
-// import logo from "./logo.svg";
+import logo from "./logo.png";
 import "./App.css";
 import axios from "axios";
 import { Box, Grommet } from "grommet";
@@ -72,8 +72,10 @@ export default function App() {
   return (
     <Grommet theme={theme} className="App" style={{ height: "100%" }}>
       <div className="App-header">
-        {/* <img src={logo} className="App-logo" alt="logo" /> */}
-        <h2>Truck Stop Finder</h2>
+        <a href="/">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h2>Truck Stop Finder</h2>
+        </a>
       </div>
       <Map id="map" locations={locations} view={"view"} />
       {currentView.view === "Search" ? (
@@ -86,7 +88,9 @@ export default function App() {
           setLocationState={setLocationState}
         />
       ) : null}
-      {currentView.view === "Results" ? <Results locations={locations} /> : null}
+      {currentView.view === "Results" ? (
+        <Results locations={locations} currentView={currentView} setCurrentView={setCurrentView} />
+      ) : null}
     </Grommet>
   );
 }

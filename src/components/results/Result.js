@@ -35,7 +35,7 @@ export default function Result(props) {
           ]}
         >
           <Box gridArea="address">
-            <Box direction="horizontal" justify="between">
+            <Box direction="row" justify="between">
               <span>Exit {i.highwayAndExit.exit}</span>
               <span>{i.highwayAndExit.highway}</span>
               <span>Store #{i.id}</span>
