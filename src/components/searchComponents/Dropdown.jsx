@@ -70,7 +70,9 @@ export function Dropdown({ locationState, setLocationState, handleDropdown }) {
       }
     })();
     return () => controller?.abort();
+
   }, [locationState]);
+staging
 
   useEffect(() => {
     handleDropdown("state", stateState);
@@ -131,12 +133,15 @@ export function Dropdown({ locationState, setLocationState, handleDropdown }) {
   //   console.log("THE VAL", e.target.value);
   //   //here you will see the current selected value of the select input
   // }
-
+  const handleChange2 = (event) => {
+    console.log("Genre Changed", event);
+  };
   if (isLoading) {
     return <div></div>;
   }
   return (
     <div>
+
       <select label="State" onChange={(e) => setStateState(e.target.value)}>
         {createStateDropdown()}
       </select>
@@ -146,6 +151,7 @@ export function Dropdown({ locationState, setLocationState, handleDropdown }) {
       <select label="Highway" onChange={(e) => setHighwayState(e.target.value)}>
         {createHighwayDropdown()}
       </select>
+
     </div>
   );
 }

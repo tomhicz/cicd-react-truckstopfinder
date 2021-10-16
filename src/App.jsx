@@ -71,7 +71,11 @@ export default function App() {
         />
       ) : null}
       {currentView.view === "Results" ? (
+
+
+
         <Results locations={locations} currentView={currentView} setCurrentView={setCurrentView} />
+ staging
       ) : null}
     </Grommet>
   );
