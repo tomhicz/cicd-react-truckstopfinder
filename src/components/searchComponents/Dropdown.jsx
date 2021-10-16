@@ -6,9 +6,9 @@ export function Dropdown({ locationState, setLocationState, handleDropdown }) {
   const [stateState, setStateState] = useState("-");
   const [cityState, setCityState] = useState("-");
   const [highwayState, setHighwayState] = useState("-");
-  const [stateList, setStateList] = useState("");
-  const [cityList, setCityList] = useState("");
-  const [highwayList, setHighwayList] = useState("");
+  const [stateList, setStateList] = useState(["State"]);
+  const [cityList, setCityList] = useState(["City"]);
+  const [highwayList, setHighwayList] = useState(["Highway"]);
 
   //let locationData;
   console.log("locationState", locationState);
@@ -27,6 +27,8 @@ export function Dropdown({ locationState, setLocationState, handleDropdown }) {
           console.log("----------LOCATIONS STATE FETCH---------");
           console.log("RESPONSE", response);
           setStateList(response);
+          setCityList(["City"]);
+          setHighwayList(["Highway"]);
           console.log("locationState", locationState);
           setLoading(false);
         } catch (e) {
@@ -59,9 +61,6 @@ export function Dropdown({ locationState, setLocationState, handleDropdown }) {
           console.log("----------LOCATIONS HIGHWAY FETCH---------");
           console.log("RESPONSE", response);
           setHighwayList(response);
-          if (response.length === 1) {
-            setHighwayState(response[0]);
-          }
           console.log("locationState", locationState);
           setLoading(false);
         } catch (e) {
@@ -85,24 +84,27 @@ export function Dropdown({ locationState, setLocationState, handleDropdown }) {
   }, [highwayState]);
 
   function createStateDropdown() {
-    const locationData1 = stateList;
     const items = [];
-    let i = 0;
-    for (const state of locationData1) {
-      items.push(
-        <option key={i} value={state}>
+    let i = 1;
+    for (const state of stateList) {
+      items.unshift(
+        <option selected="State" key={i} value={state}>
           {state}
         </option>
       );
       i++;
     }
+    items.push(
+      <option selected="State" key={0} value={"-"}>
+        {"State"}
+      </option>
+    );
     return items;
   }
   function createCityDropdown() {
-    const locationData2 = cityList;
     const items = [];
-    let i = 0;
-    for (const city of locationData2) {
+    let i = 1;
+    for (const city of cityList) {
       items.push(
         <option key={i} value={city}>
           {city}
@@ -110,13 +112,17 @@ export function Dropdown({ locationState, setLocationState, handleDropdown }) {
       );
       i++;
     }
+    items.push(
+      <option selected="City" key={0} value={"-"}>
+        {"City"}
+      </option>
+    );
     return items;
   }
   function createHighwayDropdown() {
-    const locationData3 = highwayList;
     const items = [];
-    let i = 0;
-    for (const hwy of locationData3) {
+    let i = 1;
+    for (const hwy of highwayList) {
       items.push(
         <option key={i} value={hwy}>
           {hwy}
@@ -124,30 +130,22 @@ export function Dropdown({ locationState, setLocationState, handleDropdown }) {
       );
       i++;
     }
+    items.push(
+      <option selected="Highway" key={0} value={"-"}>
+        {"Highway"}
+      </option>
+    );
     return items;
   }
 
-  // function onStateDropdown(e) {
-  //   console.log("THE VAL", e.target.value);
-  //   //here you will see the current selected value of the select input
-  // }
-  const handleChange2 = (event) => {
-    console.log("Genre Changed", event);
-  };
   if (isLoading) {
     return <div></div>;
   }
   return (
     <div>
-      <select label="State" onChange={(e) => setStateState(e.target.value)}>
-        {createStateDropdown()}
-      </select>
-      <select label="City" onChange={(e) => setCityState(e.target.value)}>
-        {createCityDropdown()}
-      </select>
-      <select label="Highway" onChange={(e) => setHighwayState(e.target.value)}>
-        {createHighwayDropdown()}
-      </select>
+      <select onChange={(e) => setStateState(e.target.value)}>{createStateDropdown()}</select>
+      <select onChange={(e) => setCityState(e.target.value)}>{createCityDropdown()}</select>
+      <select onChange={(e) => setHighwayState(e.target.value)}>{createHighwayDropdown()}</select>
     </div>
   );
 }
