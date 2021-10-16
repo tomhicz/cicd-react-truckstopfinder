@@ -71,11 +71,12 @@ export default function App() {
         />
       ) : null}
       {currentView.view === "Results" ? (
-
-
-
-        <Results locations={locations} currentView={currentView} setCurrentView={setCurrentView} />
- staging
+        <Results
+          locations={locations}
+          currentView={currentView}
+          setCurrentView={setCurrentView}
+          filters={searchState}
+        />
       ) : null}
     </Grommet>
   );
