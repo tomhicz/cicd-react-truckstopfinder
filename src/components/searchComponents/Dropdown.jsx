@@ -70,9 +70,7 @@ export function Dropdown({ locationState, setLocationState, handleDropdown }) {
       }
     })();
     return () => controller?.abort();
-
   }, [locationState]);
-staging
 
   useEffect(() => {
     handleDropdown("state", stateState);
@@ -141,7 +139,6 @@ staging
   }
   return (
     <div>
-
       <select label="State" onChange={(e) => setStateState(e.target.value)}>
         {createStateDropdown()}
       </select>
@@ -151,7 +148,6 @@ staging
       <select label="Highway" onChange={(e) => setHighwayState(e.target.value)}>
         {createHighwayDropdown()}
       </select>
-
     </div>
   );
 }

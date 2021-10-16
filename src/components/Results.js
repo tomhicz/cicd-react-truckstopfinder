@@ -5,27 +5,22 @@ import _ from "lodash";
 import Result from "./results/Result";
 //import { query } from "./network";
 
-export default function Results({ locations, currentView, setCurrentView }) {
+export default function Results({ locations, currentView, setCurrentView, filters }) {
   //state
   const [results, setResults] = useState([]);
 
   //hooks
   useEffect(() => {
-
-    // for (const key in props.filters) {
-    //   console.log("TEST", key);
-    //   console.log(Object.keys(_.pickBy(props.filters[key], (value) => value === true)));
-    // }
-    const res = Object.keys(_.pickBy(props.filters.restaurants, (value) => value === true));
-    const ame = Object.keys(_.pickBy(props.filters.amenities, (value) => value === true));
-    const type = Object.keys(_.pickBy(props.filters.type, (value) => value === true));
-    const truck = Object.keys(_.pickBy(props.filters.truck_services, (value) => value === true));
+    const res = Object.keys(_.pickBy(filters.restaurants, (value) => value === true));
+    const ame = Object.keys(_.pickBy(filters.amenities, (value) => value === true));
+    const type = Object.keys(_.pickBy(filters.type, (value) => value === true));
+    const truck = Object.keys(_.pickBy(filters.truck_services, (value) => value === true));
 
     const checker = (arr, target) => target.some((val) => arr.includes(val));
     const results = [];
-    console.log("REST", type, props.locations[0]);
+    console.log("REST", type, locations[0]);
 
-    props.locations.forEach((location) => {
+    locations.forEach((location) => {
       if (
         (res[0] === undefined || checker(res, Object.values(location.restaurants))) &&
         (ame[0] === undefined || checker(ame, Object.values(location.amenities))) &&
@@ -38,8 +33,7 @@ export default function Results({ locations, currentView, setCurrentView }) {
 
     console.log("FILTER", results);
     setResults(results);
-  }, [props]);
-
+  }, []);
 
   //handlers
 
