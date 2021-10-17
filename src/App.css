@@ -40,3 +40,17 @@ button {
   background-color: #f13434;
   border-radius: 5px;
 }
+
+.select {
+  width: 100%;
+  min-width: 15ch;
+  max-width: 30ch;
+  border: 1px solid var(--select-border);
+  border-radius: 0.25em;
+  padding: 0.25em 0.5em;
+  font-size: 1.25rem;
+  cursor: pointer;
+  line-height: 1.1;
+  background-color: rgb(110, 34, 34);
+  background-image: linear-gradient(to top, #8f4c4c, #fff 33%);
+}

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Checkbox } from "./Checkbox";
+import { CheckboxWrapper } from "../../elements";
 import axios from "axios";
 
 const Search = (props) => (
-  <div>
+  <CheckboxWrapper>
     {props.options.map((option) => (
       <Checkbox
         key={props.options.indexOf(option)}
@@ -12,7 +13,7 @@ const Search = (props) => (
         {...option}
       />
     ))}
-  </div>
+  </CheckboxWrapper>
 );
 
 export function Restaurants({ searchState, setSearchState, handleChange }) {
@@ -53,8 +54,6 @@ export function Restaurants({ searchState, setSearchState, handleChange }) {
     return <div></div>;
   }
   return (
-    <div>
-      <Search options={restaurants} handleChange={handleChange} isLoading={isLoading}></Search>
-    </div>
+    <Search options={restaurants.sort()} handleChange={handleChange} isLoading={isLoading}></Search>
   );
 }
