@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Types, Amenities, Restaurants, Dropdown, Button, TruckServices } from "./searchComponents";
 import { SearchWrapper } from "../elements";
-import { Card, CardHeader } from "grommet";
+import { Card, CardHeader, Menu } from "grommet";
 
 export default function Search({
   currentView,

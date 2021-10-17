@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { DropdownWrapper } from "../../elements";
 
 export function Dropdown({ locationState, setLocationState, handleDropdown }) {
   const [isLoading, setLoading] = useState(true);
@@ -99,13 +100,13 @@ export function Dropdown({ locationState, setLocationState, handleDropdown }) {
         {"State"}
       </option>
     );
-    return items;
+    return items.sort();
   }
   function createCityDropdown() {
     const items = [];
     let i = 1;
     for (const city of cityList) {
-      items.push(
+      items.unshift(
         <option key={i} value={city}>
           {city}
         </option>
@@ -117,7 +118,7 @@ export function Dropdown({ locationState, setLocationState, handleDropdown }) {
         {"City"}
       </option>
     );
-    return items;
+    return items.sort();
   }
   function createHighwayDropdown() {
     const items = [];
@@ -135,17 +136,17 @@ export function Dropdown({ locationState, setLocationState, handleDropdown }) {
         {"Highway"}
       </option>
     );
-    return items;
+    return items.sort();
   }
 
   if (isLoading) {
     return <div></div>;
   }
   return (
-    <div>
+    <DropdownWrapper>
       <select onChange={(e) => setStateState(e.target.value)}>{createStateDropdown()}</select>
       <select onChange={(e) => setCityState(e.target.value)}>{createCityDropdown()}</select>
       <select onChange={(e) => setHighwayState(e.target.value)}>{createHighwayDropdown()}</select>
-    </div>
+    </DropdownWrapper>
   );
 }
