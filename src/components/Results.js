@@ -11,6 +11,7 @@ export default function Results({
   filters,
   locationState,
   setLocationState,
+  setLocations,
 }) {
   //state
   const [results, setResults] = useState([]);
@@ -27,25 +28,28 @@ export default function Results({
     const checker2 = (arr, target) => target.every((val) => arr.includes(val));
     const results = [];
     const filteredLocations = [];
-    console.log("LOCATIONS", address);
 
     locations.forEach((location) => {
-      if (
-        address[1] === "-" &&
-        address[2] === "-" &&
-        checker([address[0]], Object.values(location.addresses))
-      ) {
+      if (address[1] === "-" && address[2] === "-" && location.addresses.State === address[0]) {
         filteredLocations.push(location);
       } else if (
         address[2] === "-" &&
-        checker([address[0], address[1]], Object.values(location.addresses))
+        location.addresses.State === address[0] &&
+        location.addresses.City === address[1]
       ) {
         filteredLocations.push(location);
-      } else if (checker(address, Object.values(location.addresses))) {
+      } else if (
+        location.addresses.State === address[0] &&
+        location.addresses.City === address[1] &&
+        location.highwayAndExit.highway === address[2]
+      ) {
+        filteredLocations.push(location);
+      } else if (address[0] === "-" && address[1] === "-" && address[2] === "-") {
         filteredLocations.push(location);
       }
     });
 
+    console.log(filteredLocations);
     filteredLocations.forEach((location) => {
       if (
         (res[0] === undefined || checker(res, Object.values(location.restaurants))) &&
@@ -57,8 +61,8 @@ export default function Results({
       }
     });
 
-    console.log("LOCATIONS FILTER", filteredLocations);
     setResults(results);
+    setLocations(results);
   }, []);
 
   //handlers

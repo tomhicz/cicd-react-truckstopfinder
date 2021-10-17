@@ -78,6 +78,7 @@ export default function App() {
           filters={searchState}
           locationState={locationState}
           setLocationState={setLocationState}
+          setLocations={setLocations}
         />
       ) : null}
     </Grommet>

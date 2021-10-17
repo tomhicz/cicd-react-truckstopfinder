@@ -25,8 +25,8 @@ const travelStop = new window.google.maps.MarkerImage(
 const MyMap = withGoogleMap((props) => (
   <GoogleMap
     ref={props.onMapLoad}
-    defaultZoom={4}
-    defaultCenter={{ lat: 25.7392, lng: -104.9903 }}
+    defaultZoom={4.4}
+    defaultCenter={{ lat: 38.7392, lng: -100.9903 }}
     onClick={props.onMapClick}
   >
     {props.markers.map((marker) => (
