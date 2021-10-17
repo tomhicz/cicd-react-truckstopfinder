@@ -4,6 +4,8 @@ export const DropdownWrapper = styled.div`
   display: grid;
   grid-template-columns: 25% 25% 25%;
   align-items: center;
-  justify-items: center;
-  column-gap: 10px;
+  column-gap: 25px;
+  margin: 25px;
+  padding: 5px 50px 5px 90px;
+  font-size: 50px;
 `;
