@@ -7,9 +7,9 @@ export function Dropdown({ locationState, setLocationState, handleDropdown }) {
   const [stateState, setStateState] = useState("-");
   const [cityState, setCityState] = useState("-");
   const [highwayState, setHighwayState] = useState("-");
-  const [stateList, setStateList] = useState(["State"]);
-  const [cityList, setCityList] = useState(["City"]);
-  const [highwayList, setHighwayList] = useState(["Highway"]);
+  const [stateList, setStateList] = useState(["-"]);
+  const [cityList, setCityList] = useState(["-"]);
+  const [highwayList, setHighwayList] = useState(["-"]);
 
   //let locationData;
   console.log("locationState", locationState);
@@ -28,8 +28,8 @@ export function Dropdown({ locationState, setLocationState, handleDropdown }) {
           console.log("----------LOCATIONS STATE FETCH---------");
           console.log("RESPONSE", response);
           setStateList(response);
-          setCityList(["City"]);
-          setHighwayList(["Highway"]);
+          setCityList([]);
+          setHighwayList([]);
           console.log("locationState", locationState);
           setLoading(false);
         } catch (e) {
@@ -114,7 +114,7 @@ export function Dropdown({ locationState, setLocationState, handleDropdown }) {
       i++;
     }
     items.push(
-      <option selected="City" key={0} value={"-"}>
+      <option selected="-" key={0} value={"-"}>
         {"City"}
       </option>
     );
@@ -132,7 +132,7 @@ export function Dropdown({ locationState, setLocationState, handleDropdown }) {
       i++;
     }
     items.push(
-      <option selected="Highway" key={0} value={"-"}>
+      <option selected="-" key={0} value={"-"}>
         {"Highway"}
       </option>
     );
@@ -145,7 +145,9 @@ export function Dropdown({ locationState, setLocationState, handleDropdown }) {
   return (
     <DropdownWrapper>
       <select onChange={(e) => setStateState(e.target.value)}>{createStateDropdown()}</select>
+      {"\n"}
       <select onChange={(e) => setCityState(e.target.value)}>{createCityDropdown()}</select>
+      {"\n"}
       <select onChange={(e) => setHighwayState(e.target.value)}>{createHighwayDropdown()}</select>
     </DropdownWrapper>
   );

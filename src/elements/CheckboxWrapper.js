@@ -10,10 +10,7 @@ export const CheckboxWrapper = styled.div`
   justify-items: left;
 
   @media ${theme.breakpoints.mobile} {
-    grid-template-columns: 2fr 2fr;
-  }
-
-  @media ${theme.breakpoints.mobile} {
     padding: ${`${theme.spacings.medium} ${theme.spacings.large}`};
+    grid-template-columns: 2fr 2fr;
   }
 `;
