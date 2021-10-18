@@ -54,3 +54,14 @@ button {
   background-color: rgb(110, 34, 34);
   background-image: linear-gradient(to top, #8f4c4c, #fff 33%);
 }
+
+.types {
+  padding: 2rem 3rem;
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+  align-items: left;
+  column-gap: 25px;
+  margin: 25px;
+  padding: 5px 50px 5px 90px;
+  font-size: 50px;
+}
