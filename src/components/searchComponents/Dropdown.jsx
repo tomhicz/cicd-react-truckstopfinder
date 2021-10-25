@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { DropdownWrapper } from "../../elements";
 
 export function Dropdown({ locationState, setLocationState, handleDropdown }) {
   const [isLoading, setLoading] = useState(true);
   const [stateState, setStateState] = useState("-");
   const [cityState, setCityState] = useState("-");
   const [highwayState, setHighwayState] = useState("-");
-  const [stateList, setStateList] = useState(["State"]);
-  const [cityList, setCityList] = useState(["City"]);
-  const [highwayList, setHighwayList] = useState(["Highway"]);
+  const [stateList, setStateList] = useState(["-"]);
+  const [cityList, setCityList] = useState(["-"]);
+  const [highwayList, setHighwayList] = useState(["-"]);
 
   //let locationData;
   console.log("locationState", locationState);
@@ -27,8 +28,8 @@ export function Dropdown({ locationState, setLocationState, handleDropdown }) {
           console.log("----------LOCATIONS STATE FETCH---------");
           console.log("RESPONSE", response);
           setStateList(response);
-          setCityList(["City"]);
-          setHighwayList(["Highway"]);
+          setCityList([]);
+          setHighwayList([]);
           console.log("locationState", locationState);
           setLoading(false);
         } catch (e) {
@@ -99,13 +100,13 @@ export function Dropdown({ locationState, setLocationState, handleDropdown }) {
         {"State"}
       </option>
     );
-    return items;
+    return items.sort();
   }
   function createCityDropdown() {
     const items = [];
     let i = 1;
     for (const city of cityList) {
-      items.push(
+      items.unshift(
         <option key={i} value={city}>
           {city}
         </option>
@@ -113,11 +114,11 @@ export function Dropdown({ locationState, setLocationState, handleDropdown }) {
       i++;
     }
     items.push(
-      <option selected="City" key={0} value={"-"}>
+      <option selected="-" key={0} value={"-"}>
         {"City"}
       </option>
     );
-    return items;
+    return items.sort();
   }
   function createHighwayDropdown() {
     const items = [];
@@ -131,21 +132,23 @@ export function Dropdown({ locationState, setLocationState, handleDropdown }) {
       i++;
     }
     items.push(
-      <option selected="Highway" key={0} value={"-"}>
+      <option selected="-" key={0} value={"-"}>
         {"Highway"}
       </option>
     );
-    return items;
+    return items.sort();
   }
 
   if (isLoading) {
     return <div></div>;
   }
   return (
-    <div>
+    <DropdownWrapper>
       <select onChange={(e) => setStateState(e.target.value)}>{createStateDropdown()}</select>
+      {"\n"}
       <select onChange={(e) => setCityState(e.target.value)}>{createCityDropdown()}</select>
+      {"\n"}
       <select onChange={(e) => setHighwayState(e.target.value)}>{createHighwayDropdown()}</select>
-    </div>
+    </DropdownWrapper>
   );
 }

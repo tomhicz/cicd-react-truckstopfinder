@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { Checkbox } from "./Checkbox";
+import { TypesWrapper } from "../../elements";
 
 const Search = (props) => (
-  <div>
+  <TypesWrapper>
     {props.types.map((type) => (
       <Checkbox
         key={type.key}
@@ -11,7 +12,7 @@ const Search = (props) => (
         {...type}
       />
     ))}
-  </div>
+  </TypesWrapper>
 );
 
 export function Types({ searchState, setSearchState, handleChange }) {
@@ -35,9 +36,5 @@ export function Types({ searchState, setSearchState, handleChange }) {
     },
   ];
 
-  return (
-    <div>
-      <Search types={types} handleChange={handleChange}></Search>
-    </div>
-  );
+  return <Search className="types" types={types} handleChange={handleChange}></Search>;
 }
