@@ -12,12 +12,17 @@ export default function Results({
   locationState,
   setLocationState,
   setLocations,
+  results,
+  setResults,
 }) {
   //state
-  const [results, setResults] = useState([]);
+
+  let cache;
 
   //hooks
   useEffect(() => {
+    console.log("LOCATIONS:", locations);
+    cache = [...locations];
     const address = Object.values(locationState);
     const res = Object.keys(_.pickBy(filters.restaurants, (value) => value === true));
     const ame = Object.keys(_.pickBy(filters.amenities, (value) => value === true));
@@ -66,6 +71,19 @@ export default function Results({
   }, []);
 
   //handlers
+  function handleAgain(e) {
+    console.log("SEARCHING AGAIN");
+    // setLocations(cache);
+    // setResults(cache);
+    setCurrentView(
+      { view: "Search" },
+      setLocationState({
+        state: "-",
+        city: "-",
+        highway: "-",
+      })
+    );
+  }
 
   return (
     <Box direction="column" background="light-4">
@@ -73,19 +91,7 @@ export default function Results({
         return <Result key={val.id} result={val} />;
       })}
       <Box alignContent="center" direction="row" justify="around" pad="small">
-        <button
-          key={1}
-          onClick={(e) =>
-            setCurrentView(
-              { view: "Search" },
-              setLocationState({
-                state: "-",
-                city: "-",
-                highway: "-",
-              })
-            )
-          }
-        >
+        <button key={1} onClick={handleAgain}>
           Search Again
         </button>
       </Box>

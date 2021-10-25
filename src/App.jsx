@@ -8,7 +8,7 @@ import axios from "axios";
 import { Box, Grommet } from "grommet";
 
 export default function App() {
-  //Gtommet theme styles
+  //Grommet theme styles
   const theme = {
     global: {
       font: {
@@ -33,6 +33,7 @@ export default function App() {
     city: "-",
     highway: "-",
   });
+  const [results, setResults] = useState([]);
 
   //fetch locations
   useEffect(() => {
@@ -79,6 +80,8 @@ export default function App() {
           locationState={locationState}
           setLocationState={setLocationState}
           setLocations={setLocations}
+          results={results}
+          setResults={setResults}
         />
       ) : null}
     </Grommet>
