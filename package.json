@@ -59,7 +59,7 @@
     "sinon": "^9.2.4"
   },
   "engines": {
-    "node": ">=9.10.0",
+    "node": "14.x",
     "yarn": ">=1.6.0"
   },
   "browserslist": {
