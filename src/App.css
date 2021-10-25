@@ -39,6 +39,14 @@ button {
   -webkit-appearance: none;
   background-color: #f13434;
   border-radius: 5px;
+  font-size: 1.125rem;
+  cursor: pointer;
+  transition: 300ms;
+}
+button:hover {
+  border: 1px solid #f13434;
+  color: #f13434;
+  background-color: white;
 }
 
 .select {

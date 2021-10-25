@@ -1,5 +1,4 @@
 import React from "react";
-import { CheckboxWrapper } from "../../elements";
 
 const App = () => {
   //state
