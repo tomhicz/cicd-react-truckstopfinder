@@ -2,7 +2,7 @@
 
 (This app was created as part of a team project at the Code Chrysalis Bootcamp.)
 
-![Search Screen](G5wmrDcHdw.gif "Search Screen")
+![Search Screen](img/G5wmrDcHdw.gif "Search Screen")
 
 ### Front End
 
