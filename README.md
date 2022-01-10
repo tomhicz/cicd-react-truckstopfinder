@@ -22,7 +22,7 @@ The back end consists of a Postgres database depolyed on Heroku which uses a RES
 
 ## Installation
 
-Clone the app from github and (on node) run `nom install` to install the required dependencies.
+Clone the app from github and (on node) run `npm install` to install the required dependencies.
 
 If you wish to use heroku to deploy your database then create a heroku pipeline with apps and connect it to your github repo. Provision a postgres database on your herou app.
 
@@ -38,7 +38,7 @@ Note, you may need to set `PGSSLMODE=no-verify` in your `.env` file to access th
 
 You may wish to run these in a separate terminal from the back end scripts during development
 
-`npm run migrate` creates the knex migrations
+`npm run migrate migration_name` runs knex migrations
 
 `npm start` starts the backend server and seeds migrations
 
