@@ -12,7 +12,7 @@ Users are able to select a state, city and/or highway and display a list of truc
 
 Users can also filter results by features such as Stop Type, Facilities, Restaurants, etc..
 
-The app is depolyed on heroku at [truck-stop-finder.herokuapp.com](http://truck-stop-finder.herokuapp.com) using a CI/CD pipeline.
+The app is depolyed on heroku at [truck-stop-searcher.herokuapp.com](http://truck-stop-searcher.herokuapp.com) using a CI/CD pipeline.
 
 ### Back End
 
