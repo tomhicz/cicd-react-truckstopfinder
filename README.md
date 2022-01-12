@@ -6,13 +6,13 @@
 
 ### Front End
 
-The front end consistes of a responsive React web app that allows truck drivers to search for FlyingK truck stops in the US.
+The front end consists of a responsive React web app that allows truck drivers to search for FlyingK truck stops in the US.
 
 Users are able to select a state, city and/or highway and display a list of truck stops and also markers on the map.
 
 Users can also filter results by features such as Stop Type, Facilities, Restaurants, etc..
 
-The app is depolyed on heroku at [truck-stop-searcher.herokuapp.com](http://truck-stop-searcher.herokuapp.com) using a CI/CD pipeline.
+The app is deployed on heroku at [truck-stop-searcher.herokuapp.com](http://truck-stop-searcher.herokuapp.com) using a CI/CD pipeline.
 
 ### Back End
 
