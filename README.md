@@ -16,7 +16,7 @@ The app is deployed on heroku at [truck-stop-searcher.herokuapp.com](http://truc
 
 ### Back End
 
-The back end consists of a Postgres database depolyed on Heroku which uses a REST API and Knex to respond to queries from the front end app.
+The back end consists of a Postgres database deployed on Heroku which uses a REST API and Knex to respond to queries from the front end app.
 
 ---
 
