@@ -36,7 +36,7 @@ Note, you may need to set `PGSSLMODE=no-verify` in your `.env` file to access th
 
 ### Back end scripts
 
-You may wish to run these in a separate terminal from the back end scripts during development
+You may wish to run these in a separate terminal from the back end scripts during development:
 
 `npm run migrate migration_name` runs knex migrations
 
@@ -44,7 +44,7 @@ You may wish to run these in a separate terminal from the back end scripts durin
 
 ### Front end scripts
 
-You may wish to run these in a separate terminal from the front end during development
+You may wish to run these in a separate terminal from the front end during development:
 
 `npm run hack` starts the front end server in watch mode for easy development
 
